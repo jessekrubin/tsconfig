@@ -12,11 +12,15 @@ npm install @jsse/tsconfig
 yarn add @jsse/tsconfig
 ```
 
-## Example
+## Usage
+
+** Configs:**
 
 ```jsonc
 {
-  "extends": "@jsse/tsconfig",
+  "extends": "@jsse/tsconfig/tsconfig.json",
+  // OR
+  "extends": "@jsse/tsconfig/tsconfig.cjs.json",
   "compilerOptions": {
     // yall's override(s)
     "target": "es2015",
