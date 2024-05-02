@@ -22,11 +22,15 @@ type PackageJson = {
   description: string;
   main: string;
   types: string;
-  exports: Record<string, string | {
-    types : string;
-    require: string;
-    import: string;
-  }>;
+  exports: Record<
+    string,
+    | string
+    | {
+        types: string;
+        require: string;
+        import: string;
+      }
+  >;
   files: string[];
   scripts: Record<string, string>;
   dependencies: Record<string, string>;
@@ -84,7 +88,7 @@ async function main() {
   for (const tsconfigFile of tsconfigFiles) {
     // const tsconfig = JSON.parse(await fs.readFile(tsconfigFile, 'utf-8'));
     console.log(tsconfigFile);
-    pkg.exports[`./${  tsconfigFile}`] = `./${  tsconfigFile}`;
+    pkg.exports[`./${tsconfigFile}`] = `./${tsconfigFile}`;
   }
 
   for (const [key, value] of Object.entries(pkg.exports)) {
@@ -95,14 +99,19 @@ async function main() {
     const tsconfigFile = key;
     const tsconfigFilename = path.basename(tsconfigFile);
     const tsconfigFilepath = path.resolve(REPO_ROOT, tsconfigFile);
-    debug(`[${tsconfigFilename}] ${tsconfigFile} => ${
-      JSON.stringify(value, undefined, 2)
-    }:`, {
-      tsconfigFile,
-      tsconfigFilename,
-      tsconfigFilepath,
-      value,
-    });
+    debug(
+      `[${tsconfigFilename}] ${tsconfigFile} => ${JSON.stringify(
+        value,
+        undefined,
+        2,
+      )}:`,
+      {
+        tsconfigFile,
+        tsconfigFilename,
+        tsconfigFilepath,
+        value,
+      },
+    );
 
     // if not in the tsconfigFiles, remove it from the exports
     if (!tsconfigFiles.includes(tsconfigFilename)) {
@@ -148,7 +157,6 @@ async function main() {
   // files field in package.json
   if (JSON.stringify(pkg) === JSON.stringify(pkgOg)) {
     echo("No changes to package.json");
-
   } else {
     echo("Changes to package.json");
     // write package.json

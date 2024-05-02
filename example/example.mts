@@ -7,7 +7,6 @@
  * @returns {number} 3
  * @example
  * quickmaths(); // 3
- *
  */
 export function quickmaths(): number {
   let r = 0;
