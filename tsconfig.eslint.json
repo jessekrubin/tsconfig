@@ -15,7 +15,9 @@
     "./*.config.mts",
     "./*.config.ts",
     "./.eslintrc.cjs",
-    "./.eslintrc.js"
+    "./.eslintrc.js",
+    "./scripts/**/*.ts",
+    "./scripts/**/*.mts"
   ],
   "exclude": ["./fixtures/**/*.*"]
 }

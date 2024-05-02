@@ -1,11 +1,13 @@
-import fs from "fs";
-import { promises as fsp } from "fs";
-import path from "path";
-import process from "process";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/no-unsafe-argument*/
+import fs, { promises as fsp } from "node:fs";
+import path from "node:path";
+import process from "node:process";
 
 const _ISWIN = process.platform === "win32";
 const _DEBUG =
-  process.env.DEBUG ||
+  process.env["DEBUG"] ||
   process.argv.map((arg) => arg.toLowerCase()).includes("--debug");
 const __FILENAME = _ISWIN
   ? import.meta.url.replace("file://", "").replace(/^\/(\w):/, "$1:")
@@ -13,6 +15,25 @@ const __FILENAME = _ISWIN
 const __DIRNAME = path.dirname(__FILENAME);
 const REPO_ROOT = path.dirname(__DIRNAME);
 const PKG_JSON_FILEPATH = path.resolve(__DIRNAME, "../package.json");
+
+type PackageJson = {
+  name: string;
+  version: string;
+  description: string;
+  main: string;
+  types: string;
+  exports: Record<string, string | {
+    types : string;
+    require: string;
+    import: string;
+  }>;
+  files: string[];
+  scripts: Record<string, string>;
+  dependencies: Record<string, string>;
+  devDependencies: Record<string, string>;
+  peerDependencies: Record<string, string>;
+  [key: string]: any;
+};
 
 function echo(...args: any[]) {
   console.log(...args);
@@ -38,21 +59,22 @@ async function main() {
   debug({
     _ISWIN,
     _DEBUG,
-    __FILENAME: __FILENAME,
-    __DIRNAME: __DIRNAME,
+    __FILENAME,
+    __DIRNAME,
     REPO_ROOT,
     PKG_JSON_FILEPATH,
   });
   const tsconfigFiles = await findTsconfigFiles();
   const tsconfigs = tsconfigFiles.map((tsconfigFile) => {
-    return JSON.parse(fs.readFileSync(tsconfigFile, "utf-8"));
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return JSON.parse(fs.readFileSync(tsconfigFile, "utf8"));
   });
   echo(tsconfigs);
   echo(`Found ${tsconfigFiles.length} tsconfig files:`, tsconfigFiles);
   // read package.json
-  const pkgJsonStr = await fsp.readFile("./package.json", "utf-8");
-  const pkg = JSON.parse(pkgJsonStr);
-  const pkgOg = JSON.parse(pkgJsonStr);
+  const pkgJsonStr = await fsp.readFile("./package.json", "utf8");
+  const pkg = JSON.parse(pkgJsonStr) as PackageJson;
+  const pkgOg = JSON.parse(pkgJsonStr) as PackageJson;
 
   /**
    * ====================
@@ -62,7 +84,7 @@ async function main() {
   for (const tsconfigFile of tsconfigFiles) {
     // const tsconfig = JSON.parse(await fs.readFile(tsconfigFile, 'utf-8'));
     console.log(tsconfigFile);
-    pkg.exports["./" + tsconfigFile] = "./" + tsconfigFile;
+    pkg.exports[`./${  tsconfigFile}`] = `./${  tsconfigFile}`;
   }
 
   for (const [key, value] of Object.entries(pkg.exports)) {
@@ -73,7 +95,9 @@ async function main() {
     const tsconfigFile = key;
     const tsconfigFilename = path.basename(tsconfigFile);
     const tsconfigFilepath = path.resolve(REPO_ROOT, tsconfigFile);
-    debug(`[${tsconfigFilename}] ${tsconfigFile} => ${value}:`, {
+    debug(`[${tsconfigFilename}] ${tsconfigFile} => ${
+      JSON.stringify(value, undefined, 2)
+    }:`, {
       tsconfigFile,
       tsconfigFilename,
       tsconfigFilepath,
@@ -85,6 +109,7 @@ async function main() {
       echo(
         `EXPORT NOT FOUND ${tsconfigFile}: Removing ${tsconfigFile} from package.json exports.`,
       );
+      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
       delete pkg.exports[key];
     }
   }
@@ -116,7 +141,6 @@ async function main() {
       );
       pkg.files = pkg.files.filter((f) => f !== tsconfigFile);
     }
-
   }
 
   // make sure that files is unique and sorted
@@ -124,7 +148,7 @@ async function main() {
   // files field in package.json
   if (JSON.stringify(pkg) === JSON.stringify(pkgOg)) {
     echo("No changes to package.json");
-    return;
+
   } else {
     echo("Changes to package.json");
     // write package.json
