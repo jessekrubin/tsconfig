@@ -1,0 +1,70 @@
+{
+  "name": "@jsse/tsconfig",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "quick-maths",
+  "author": "jessekrubin <jessekrubin@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "jawascript",
+    "typescript",
+    "tsconfig",
+    "config"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./package.json": "./package.json",
+    "./tsconfig.json": "./tsconfig.json",
+    "./tsconfig.cjs.json": "./tsconfig.cjs.json",
+    "./tsconfig.eslint.json": "./tsconfig.eslint.json",
+    "./tsconfig.strict-cjs.json": "./tsconfig.strict-cjs.json",
+    "./tsconfig.strict.json": "./tsconfig.strict.json"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "jsse-tsconfig": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "package.json",
+    "src",
+    "tsconfig.cjs.json",
+    "tsconfig.eslint.json",
+    "tsconfig.json",
+    "tsconfig.strict-cjs.json",
+    "tsconfig.strict.json"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build-fast": "tsup",
+    "build": "tsup --dts",
+    "gen": "tsx scripts/update-pkg-json-exports.mts",
+    "check": "eslint . && prettier --check .",
+    "fmt": "prettier --write .",
+    "fmtc": "prettier --check .",
+    "lint": "eslint .",
+    "test": "vitest --run",
+    "tsc": "tsc -p tsconfig.json",
+    "prepack": "npm run build",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@jsse/eslint-config": "^0.1.12",
+    "@types/node": "^20.12.8",
+    "eslint": "^8.57.0 && <9.0.0",
+    "prettier": "^3.2.5",
+    "tsup": "^8.0.2",
+    "tsx": "^4.8.2",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.10",
+    "vitest": "^1.5.3"
+  }
+}
