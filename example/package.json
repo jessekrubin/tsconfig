@@ -1,0 +1,19 @@
+{
+  "name": "dev",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsc --showConfig"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@jsse/tsconfig": "file:..",
+    "tsx": "^4.7.1",
+    "typescript": "^5.4.5"
+  }
+}
