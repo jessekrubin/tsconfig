@@ -55,7 +55,7 @@ async function findTsconfigFiles() {
     (file) =>
       file.endsWith(".json") &&
       file.startsWith("tsconfig") &&
-      !file.includes("build"),
+      ["build", "tsconfig._"].every((exclude) => !file.includes(exclude)),
   );
 }
 

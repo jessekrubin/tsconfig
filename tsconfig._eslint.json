@@ -4,20 +4,22 @@
   "include": [
     "**/*.ts",
     "./*.cjs",
-    "./.*.cjs",
-    "./*.js",
-    "./*.mjs",
-    "./*.mts",
-    "./*.ts",
     "./*.config.cjs",
+    "./*.config.cts",
     "./*.config.js",
     "./*.config.mjs",
     "./*.config.mts",
     "./*.config.ts",
+    "./*.js",
+    "./*.mjs",
+    "./*.mts",
+    "./*.ts",
+    "./.*.cjs",
     "./.eslintrc.cjs",
     "./.eslintrc.js",
-    "./scripts/**/*.ts",
-    "./scripts/**/*.mts"
+    "./example/*.mts",
+    "./scripts/**/*.mts",
+    "./scripts/**/*.ts"
   ],
   "exclude": ["./fixtures/**/*.*"]
 }
