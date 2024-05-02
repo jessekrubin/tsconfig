@@ -1,6 +1,6 @@
 # `@jsse/tsconfig`
 
-[![npm version](https://badge.fury.io/js/%jsse%tsconfig.svg)](https://badge.fury.io/js/%jsse%tsconfig)
+![npm version](https://img.shields.io/npm/v/%40jsse%2Ftsconfig)
 
 tsconfig(s) `compilerOptions`
 
