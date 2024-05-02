@@ -1,26 +1,46 @@
 {
-  "extends": "./dprint.json",
+  "typescript": {},
+  "json": {
+    "indentWidth": 2,
+    "useTabs": false,
+    "associations": [".prettierrc"]
+  },
+  "markdown": {},
+  "toml": {},
+  "dockerfile": {},
+  "ruff": {},
   "prettier": {
     "bracketSpacing": true,
     "endOfLine": "lf",
     "printWidth": 80,
     "semi": true,
     "singleQuote": false,
-    "tabWidth": 2,
     "trailingComma": "all",
     "useTabs": false
   },
   "includes": [
-    "**/*.{ts,tsx,js,jsx,json,md,toml,Dockerfile,dockerfile}",
+    "**/*.{ts,tsx,mts,cts,cjs,mjs,js,jsx,json,md,toml,Dockerfile,dockerfile}",
     "./**/{dockerfile,Dockerfile}"
   ],
+  "excludes": [
+    "**/*.min.{js,cjs,mjs,ts,mts,cts,jsx,tsx,json,geojson,lock}",
+    "**/*-lock.json",
+    "**/.next",
+    "**/.venv",
+    "**/build",
+    "**/coverage",
+    "**/dist",
+    "**/node_modules",
+    "**/temp",
+    "**/tmp"
+  ],
   "plugins": [
-    "https://plugins.dprint.dev/typescript-0.89.3.wasm",
+    "https://plugins.dprint.dev/typescript-0.90.4.wasm",
     "https://plugins.dprint.dev/json-0.19.2.wasm",
-    "https://plugins.dprint.dev/markdown-0.16.4.wasm",
+    "https://plugins.dprint.dev/markdown-0.17.0.wasm",
     "https://plugins.dprint.dev/toml-0.6.1.wasm",
     "https://plugins.dprint.dev/dockerfile-0.3.0.wasm",
-    "https://plugins.dprint.dev/ruff-0.2.3.wasm",
-    "https://plugins.dprint.dev/prettier-0.39.0.json@896b70f29ef8213c1b0ba81a93cee9c2d4f39ac2194040313cd433906db7bc7c"
+    "https://plugins.dprint.dev/ruff-0.3.1.wasm",
+    "https://plugins.dprint.dev/prettier-0.40.0.json@68c668863ec834d4be0f6f5ccaab415df75336a992aceb7eeeb14fdf096a9e9c"
   ]
 }
