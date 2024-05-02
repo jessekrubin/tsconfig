@@ -18,8 +18,9 @@ yarn add @jsse/tsconfig
 
 ```jsonc
 {
+  // ESM ("type": "module")
   "extends": "@jsse/tsconfig/tsconfig.json",
-  // OR
+  // CJS ("type": "commonjs")
   "extends": "@jsse/tsconfig/tsconfig.cjs.json",
   "compilerOptions": {
     // yall's override(s)
@@ -34,8 +35,8 @@ yarn add @jsse/tsconfig
 
 # DEV
 
+- pnpm = package-manager
 - Repo uses `just` (ref)
   - just-repo: https://github.com/casey/just
   - just-docs: https://just.systems/man/en/
-- pnpm is the package manager
-- prettier formatting uses the default config b/c configuring formaters is dumb
+- prettier formatting; uses default config b/c configuring formatters is dumb
