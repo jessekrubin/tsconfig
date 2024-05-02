@@ -14,8 +14,6 @@ yarn add @jsse/tsconfig
 
 ## Usage
 
-** Configs:**
-
 ```jsonc
 {
   // ESM ("type": "module")
