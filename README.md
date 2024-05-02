@@ -19,10 +19,10 @@ yarn add @jsse/tsconfig
   "extends": "@jsse/tsconfig",
   "compilerOptions": {
     // yall's override(s)
-    "target": "es2015"
+    "target": "es2015",
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
 }
 ```
 

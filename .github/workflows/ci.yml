@@ -5,16 +5,17 @@ on:
   pull_request:
 
 jobs:
-
   fmtc:
     if: "!contains(github.event.head_commit.message, 'skip-ci')"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - uses: dprint/check@v2.2
+      - name: prettier-check
+        id: prettier-check
+        uses: creyD/prettier_action@v4.3
         with:
-          config-path: dprint.prettier.json
+          dry: true
+          prettier_options: --check
 
   main:
     if: "!contains(github.event.head_commit.message, 'skip-ci')"

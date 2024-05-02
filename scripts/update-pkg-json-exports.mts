@@ -6,8 +6,9 @@ import path from "node:path";
 import process from "node:process";
 
 const _ISWIN = process.platform === "win32";
-const _DEBUG = process.env["DEBUG"]
-  || process.argv.map((arg) => arg.toLowerCase()).includes("--debug");
+const _DEBUG =
+  process.env["DEBUG"] ||
+  process.argv.map((arg) => arg.toLowerCase()).includes("--debug");
 const __FILENAME = _ISWIN
   ? import.meta.url.replace("file://", "").replace(/^\/(\w):/, "$1:")
   : import.meta.url.replace("file://", "");
@@ -25,10 +26,10 @@ type PackageJson = {
     string,
     | string
     | {
-      types: string;
-      require: string;
-      import: string;
-    }
+        types: string;
+        require: string;
+        import: string;
+      }
   >;
   files: string[];
   scripts: Record<string, string>;
@@ -52,9 +53,9 @@ async function findTsconfigFiles() {
   const files = await fsp.readdir(".");
   return files.filter(
     (file) =>
-      file.endsWith(".json")
-      && file.startsWith("tsconfig")
-      && !file.includes("build"),
+      file.endsWith(".json") &&
+      file.startsWith("tsconfig") &&
+      !file.includes("build"),
   );
 }
 
@@ -99,13 +100,11 @@ async function main() {
     const tsconfigFilename = path.basename(tsconfigFile);
     const tsconfigFilepath = path.resolve(REPO_ROOT, tsconfigFile);
     debug(
-      `[${tsconfigFilename}] ${tsconfigFile} => ${
-        JSON.stringify(
-          value,
-          undefined,
-          2,
-        )
-      }:`,
+      `[${tsconfigFilename}] ${tsconfigFile} => ${JSON.stringify(
+        value,
+        undefined,
+        2,
+      )}:`,
       {
         tsconfigFile,
         tsconfigFilename,
