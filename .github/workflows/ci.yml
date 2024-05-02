@@ -15,7 +15,7 @@ jobs:
         uses: creyD/prettier_action@v4.3
         with:
           dry: true
-          prettier_options: --check
+          prettier_options: --check .
 
   main:
     if: "!contains(github.event.head_commit.message, 'skip-ci')"
