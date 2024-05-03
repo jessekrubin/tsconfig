@@ -22,7 +22,7 @@ devDependencies:
     version: 8.0.2(postcss@8.4.38)(typescript@5.4.5)
   tsx:
     specifier: ^4.8.2
-    version: 4.8.2
+    version: 4.9.0
   typescript:
     specifier: ^5.4.5
     version: 5.4.5
@@ -2614,6 +2614,7 @@ packages:
   /micromatch@4.0.5:
     resolution: {integrity: sha512-DMy+ERcEW2q8Z2Po+WNXuw3c5YaUSFjAO5GsJqfEl7UjvtIuFKO6ZrKvcItdy98dwFI2N1tg3zNIdKaQT+aNdA==}
     engines: {node: '>=8.6'}
+    requiresBuild: true
     dependencies:
       braces: 3.0.2
       picomatch: 2.3.1
@@ -3521,8 +3522,8 @@ packages:
       - ts-node
     dev: true
 
-  /tsx@4.8.2:
-    resolution: {integrity: sha512-hmmzS4U4mdy1Cnzpl/NQiPUC2k34EcNSTZYVJThYKhdqTwuBeF+4cG9KUK/PFQ7KHaAaYwqlb7QfmsE2nuj+WA==}
+  /tsx@4.9.0:
+    resolution: {integrity: sha512-UY0UUhDPL6MkqkZU4xTEjEBOLfV+RIt4xeeJ1qwK73xai4/zveG+X6+tieILa7rjtegUW2LE4p7fw7gAoLuytA==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     dependencies:
