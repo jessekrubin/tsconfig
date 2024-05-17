@@ -6,6 +6,7 @@
     "moduleDetection": "auto",
     "module": "commonjs",
     "moduleResolution": "node",
-    "declaration": true
+    "declaration": true,
+    "verbatimModuleSyntax": null
   }
 }
