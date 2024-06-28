@@ -31,7 +31,7 @@ importers:
         version: 5.5.2
       vite:
         specifier: ^5.2.10
-        version: 5.3.1(@types/node@20.12.13)
+        version: 5.3.2(@types/node@20.12.13)
       vitest:
         specifier: ^1.6.0
         version: 1.6.0(@types/node@20.12.13)
@@ -1903,8 +1903,8 @@ packages:
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
 
-  vite@5.3.1:
-    resolution: {integrity: sha512-XBmSKRLXLxiaPYamLv3/hnP/KXDai1NDexN0FpkTaZXTfycHvkRHoenpgl/fvuK/kPbB6xAgoyiryAhQNxYmAQ==}
+  vite@5.3.2:
+    resolution: {integrity: sha512-6lA7OBHBlXUxiJxbO5aAY2fsHHzDr1q7DvXYnyZycRs2Dz+dXBWuhpWHvmljTRTpQC2uvGmUFFkSHF2vGo90MA==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
@@ -3907,7 +3907,7 @@ snapshots:
       debug: 4.3.4
       pathe: 1.1.2
       picocolors: 1.0.1
-      vite: 5.3.1(@types/node@20.12.13)
+      vite: 5.3.2(@types/node@20.12.13)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -3918,7 +3918,7 @@ snapshots:
       - supports-color
       - terser
 
-  vite@5.3.1(@types/node@20.12.13):
+  vite@5.3.2(@types/node@20.12.13):
     dependencies:
       esbuild: 0.21.5
       postcss: 8.4.38
@@ -3946,7 +3946,7 @@ snapshots:
       strip-literal: 2.1.0
       tinybench: 2.8.0
       tinypool: 0.8.4
-      vite: 5.3.1(@types/node@20.12.13)
+      vite: 5.3.2(@types/node@20.12.13)
       vite-node: 1.6.0(@types/node@20.12.13)
       why-is-node-running: 2.2.2
     optionalDependencies:
