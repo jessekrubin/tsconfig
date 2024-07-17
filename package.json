@@ -55,14 +55,14 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@jsse/eslint-config": "^0.1.14",
-    "@types/node": "^20.12.12",
+    "@jsse/eslint-config": "^0.1.21",
+    "@types/node": "^20.14.11",
     "eslint": "^8.57.0 && <9.0.0",
-    "prettier": "^3.2.5",
-    "tsup": "^8.0.2",
-    "tsx": "^4.10.4",
-    "typescript": "^5.4.5",
-    "vite": "^5.2.10",
+    "prettier": "^3.3.3",
+    "tsup": "^8.1.1",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.3",
+    "vite": "^5.3.4",
     "vitest": "^2.0.3"
   }
 }
