@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/naming-convention */
-/* eslint-disable @typescript-eslint/no-unsafe-argument*/
+
 import fs, { promises as fsp } from "node:fs";
 import path from "node:path";
 import process from "node:process";
 
 const _ISWIN = process.platform === "win32";
 const _DEBUG =
-  process.env["DEBUG"] ||
+  process.env.DEBUG ||
   process.argv.map((arg) => arg.toLowerCase()).includes("--debug");
 const __FILENAME = _ISWIN
   ? import.meta.url.replace("file://", "").replace(/^\/(\w):/, "$1:")
@@ -70,7 +69,6 @@ async function main() {
   });
   const tsconfigFiles = await findTsconfigFiles();
   const tsconfigs = tsconfigFiles.map((tsconfigFile) => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return JSON.parse(fs.readFileSync(tsconfigFile, "utf8"));
   });
   echo(tsconfigs);
