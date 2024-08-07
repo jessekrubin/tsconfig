@@ -5,7 +5,7 @@ export default jsse(
     ignores: ["**/dev"],
     debug: false,
     typescript: {
-      tsconfig: ["tsconfig.build.json", "tsconfig._eslint.json"],
+      tsconfig: "tsconfig._eslint.json",
     },
     reportUnusedDisableDirectives: true,
     off: [],
