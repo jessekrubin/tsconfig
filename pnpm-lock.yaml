@@ -10,7 +10,7 @@ importers:
     devDependencies:
       '@jsse/eslint-config':
         specifier: ^0.2.1
-        version: 0.2.16(@eslint-react/eslint-plugin@1.14.2(eslint@9.8.0)(typescript@5.5.4))(@typescript-eslint/utils@8.6.0(eslint@9.8.0)(typescript@5.5.4))(eslint-plugin-tailwindcss@3.17.4)(eslint@9.8.0)(typescript@5.5.4)(vitest@2.0.5(@types/node@20.16.5))
+        version: 0.2.17(@eslint-react/eslint-plugin@1.14.2(eslint@9.8.0)(typescript@5.5.4))(@typescript-eslint/utils@8.6.0(eslint@9.8.0)(typescript@5.5.4))(eslint-plugin-tailwindcss@3.17.4)(eslint@9.8.0)(typescript@5.5.4)(vitest@2.0.5(@types/node@20.16.5))
       '@swc/core':
         specifier: ^1.7.6
         version: 1.7.26
@@ -399,8 +399,8 @@ packages:
     resolution: {integrity: sha512-4Bfj15dVJdoy3RfZmmo86RK1Fwzn6SstsvK9JS+BaVKqC6QQQQyXekNaC+g+LKNgkQ+2VhGAzm6hO40AhMR3zQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@eslint/js@9.10.0':
-    resolution: {integrity: sha512-fuXtbiP5GWIn8Fz+LWoOMVf/Jxm+aajZYkhi6CuEm4SxymFM+eUWzbO9qXT+L0iCkL5+KGYMCSGxo686H19S1g==}
+  '@eslint/js@9.11.1':
+    resolution: {integrity: sha512-/qu+TWz8WwPWc7/HcIJKi+c+MOm46GdVaSlTTQcaqaL53+GsoA6MxWp5PtTx48qbSP7ylM1Kn7nhvkugfJvRSA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/js@9.8.0':
@@ -447,8 +447,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@jsse/eslint-config@0.2.16':
-    resolution: {integrity: sha512-S95X9uHuZbMC/magvuFa43e6iah6UaJW6wsFSD+acUV5Re4Xens8vDe070+vGqb/JGdF5Y2qbOfamqmIWZA+qQ==}
+  '@jsse/eslint-config@0.2.17':
+    resolution: {integrity: sha512-CtdMvKuL5da4GKt4ltu7X/5zFafFhIJsSC97E9m0eb1hkIIcSILk3dnptiLIaPTWv/FX1t7PGhGo9+tif1Re/w==}
     hasBin: true
     peerDependencies:
       '@eslint-react/eslint-plugin': ^1.5.8
@@ -2671,7 +2671,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@eslint/js@9.10.0': {}
+  '@eslint/js@9.11.1': {}
 
   '@eslint/js@9.8.0': {}
 
@@ -2716,10 +2716,11 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
 
-  '@jsse/eslint-config@0.2.16(@eslint-react/eslint-plugin@1.14.2(eslint@9.8.0)(typescript@5.5.4))(@typescript-eslint/utils@8.6.0(eslint@9.8.0)(typescript@5.5.4))(eslint-plugin-tailwindcss@3.17.4)(eslint@9.8.0)(typescript@5.5.4)(vitest@2.0.5(@types/node@20.16.5))':
+  '@jsse/eslint-config@0.2.17(@eslint-react/eslint-plugin@1.14.2(eslint@9.8.0)(typescript@5.5.4))(@typescript-eslint/utils@8.6.0(eslint@9.8.0)(typescript@5.5.4))(eslint-plugin-tailwindcss@3.17.4)(eslint@9.8.0)(typescript@5.5.4)(vitest@2.0.5(@types/node@20.16.5))':
     dependencies:
       '@eslint-react/eslint-plugin': 1.14.2(eslint@9.8.0)(typescript@5.5.4)
-      '@eslint/js': 9.10.0
+      '@eslint/compat': 1.1.1
+      '@eslint/js': 9.11.1
       '@eslint/markdown': 6.1.0(eslint@9.8.0)
       '@stylistic/eslint-plugin': 2.8.0(eslint@9.8.0)(typescript@5.5.4)
       '@typescript-eslint/eslint-plugin': 8.6.0(@typescript-eslint/parser@8.6.0(eslint@9.8.0)(typescript@5.5.4))(eslint@9.8.0)(typescript@5.5.4)
