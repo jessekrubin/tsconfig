@@ -10,13 +10,13 @@ importers:
     devDependencies:
       '@jsse/eslint-config':
         specifier: ^0.2.1
-        version: 0.2.16(@eslint-react/eslint-plugin@1.14.2(eslint@9.8.0)(typescript@5.5.4))(@typescript-eslint/utils@8.6.0(eslint@9.8.0)(typescript@5.5.4))(eslint-plugin-tailwindcss@3.17.4)(eslint@9.8.0)(typescript@5.5.4)(vitest@2.0.5(@types/node@20.16.5))
+        version: 0.2.16(@eslint-react/eslint-plugin@1.14.2(eslint@9.8.0)(typescript@5.5.4))(@typescript-eslint/utils@8.6.0(eslint@9.8.0)(typescript@5.5.4))(eslint-plugin-tailwindcss@3.17.4)(eslint@9.8.0)(typescript@5.5.4)(vitest@2.0.5(@types/node@20.16.10))
       '@swc/core':
         specifier: ^1.7.6
         version: 1.7.26
       '@types/node':
         specifier: ^20.14.11
-        version: 20.16.5
+        version: 20.16.10
       eslint:
         specifier: ^9.8.0
         version: 9.8.0
@@ -34,10 +34,10 @@ importers:
         version: 5.5.4
       vite:
         specifier: ^5.3.4
-        version: 5.4.7(@types/node@20.16.5)
+        version: 5.4.7(@types/node@20.16.10)
       vitest:
         specifier: ^2.0.3
-        version: 2.0.5(@types/node@20.16.5)
+        version: 2.0.5(@types/node@20.16.10)
 
 packages:
 
@@ -672,8 +672,8 @@ packages:
   '@types/ms@0.7.34':
     resolution: {integrity: sha512-nG96G3Wp6acyAgJqGasjODb+acrI7KltPiRxzHPXnP3NgI28bpQDRv53olbqGXbfcgF5aiiHmO3xpwEpS5Ld9g==}
 
-  '@types/node@20.16.5':
-    resolution: {integrity: sha512-VwYCweNo3ERajwy0IUlqqcyZ8/A7Zwa9ZP3MnENWcB11AejO+tLy3pu850goUW2FC/IJMdZUfKpX/yxL1gymCA==}
+  '@types/node@20.16.10':
+    resolution: {integrity: sha512-vQUKgWTjEIRFCvK6CyriPH3MZYiYlNy0fKiEYHWbcoWLEgs4opurGGKlebrTLqdSMIbXImH6XExNiIyNUv3WpA==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -2716,7 +2716,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
 
-  '@jsse/eslint-config@0.2.16(@eslint-react/eslint-plugin@1.14.2(eslint@9.8.0)(typescript@5.5.4))(@typescript-eslint/utils@8.6.0(eslint@9.8.0)(typescript@5.5.4))(eslint-plugin-tailwindcss@3.17.4)(eslint@9.8.0)(typescript@5.5.4)(vitest@2.0.5(@types/node@20.16.5))':
+  '@jsse/eslint-config@0.2.16(@eslint-react/eslint-plugin@1.14.2(eslint@9.8.0)(typescript@5.5.4))(@typescript-eslint/utils@8.6.0(eslint@9.8.0)(typescript@5.5.4))(eslint-plugin-tailwindcss@3.17.4)(eslint@9.8.0)(typescript@5.5.4)(vitest@2.0.5(@types/node@20.16.10))':
     dependencies:
       '@eslint-react/eslint-plugin': 1.14.2(eslint@9.8.0)(typescript@5.5.4)
       '@eslint/js': 9.10.0
@@ -2724,7 +2724,7 @@ snapshots:
       '@stylistic/eslint-plugin': 2.8.0(eslint@9.8.0)(typescript@5.5.4)
       '@typescript-eslint/eslint-plugin': 8.6.0(@typescript-eslint/parser@8.6.0(eslint@9.8.0)(typescript@5.5.4))(eslint@9.8.0)(typescript@5.5.4)
       '@typescript-eslint/parser': 8.6.0(eslint@9.8.0)(typescript@5.5.4)
-      '@vitest/eslint-plugin': 1.1.4(@typescript-eslint/utils@8.6.0(eslint@9.8.0)(typescript@5.5.4))(eslint@9.8.0)(typescript@5.5.4)(vitest@2.0.5(@types/node@20.16.5))
+      '@vitest/eslint-plugin': 1.1.4(@typescript-eslint/utils@8.6.0(eslint@9.8.0)(typescript@5.5.4))(eslint@9.8.0)(typescript@5.5.4)(vitest@2.0.5(@types/node@20.16.10))
       eslint: 9.8.0
       eslint-config-flat-gitignore: 0.3.0(eslint@9.8.0)
       eslint-define-config: 2.1.0
@@ -2913,7 +2913,7 @@ snapshots:
 
   '@types/ms@0.7.34': {}
 
-  '@types/node@20.16.5':
+  '@types/node@20.16.10':
     dependencies:
       undici-types: 6.19.8
 
@@ -3004,13 +3004,13 @@ snapshots:
       '@typescript-eslint/types': 8.6.0
       eslint-visitor-keys: 3.4.3
 
-  '@vitest/eslint-plugin@1.1.4(@typescript-eslint/utils@8.6.0(eslint@9.8.0)(typescript@5.5.4))(eslint@9.8.0)(typescript@5.5.4)(vitest@2.0.5(@types/node@20.16.5))':
+  '@vitest/eslint-plugin@1.1.4(@typescript-eslint/utils@8.6.0(eslint@9.8.0)(typescript@5.5.4))(eslint@9.8.0)(typescript@5.5.4)(vitest@2.0.5(@types/node@20.16.10))':
     dependencies:
       eslint: 9.8.0
     optionalDependencies:
       '@typescript-eslint/utils': 8.6.0(eslint@9.8.0)(typescript@5.5.4)
       typescript: 5.5.4
-      vitest: 2.0.5(@types/node@20.16.5)
+      vitest: 2.0.5(@types/node@20.16.10)
 
   '@vitest/expect@2.0.5':
     dependencies:
@@ -4795,13 +4795,13 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  vite-node@2.0.5(@types/node@20.16.5):
+  vite-node@2.0.5(@types/node@20.16.10):
     dependencies:
       cac: 6.7.14
       debug: 4.3.6
       pathe: 1.1.2
       tinyrainbow: 1.2.0
-      vite: 5.4.7(@types/node@20.16.5)
+      vite: 5.4.7(@types/node@20.16.10)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -4813,16 +4813,16 @@ snapshots:
       - supports-color
       - terser
 
-  vite@5.4.7(@types/node@20.16.5):
+  vite@5.4.7(@types/node@20.16.10):
     dependencies:
       esbuild: 0.21.5
       postcss: 8.4.45
       rollup: 4.20.0
     optionalDependencies:
-      '@types/node': 20.16.5
+      '@types/node': 20.16.10
       fsevents: 2.3.3
 
-  vitest@2.0.5(@types/node@20.16.5):
+  vitest@2.0.5(@types/node@20.16.10):
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@vitest/expect': 2.0.5
@@ -4840,11 +4840,11 @@ snapshots:
       tinybench: 2.8.0
       tinypool: 1.0.0
       tinyrainbow: 1.2.0
-      vite: 5.4.7(@types/node@20.16.5)
-      vite-node: 2.0.5(@types/node@20.16.5)
+      vite: 5.4.7(@types/node@20.16.10)
+      vite-node: 2.0.5(@types/node@20.16.10)
       why-is-node-running: 2.3.0
     optionalDependencies:
-      '@types/node': 20.16.5
+      '@types/node': 20.16.10
     transitivePeerDependencies:
       - less
       - lightningcss
