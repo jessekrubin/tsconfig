@@ -6,7 +6,8 @@ import process from "node:process";
 
 const _ISWIN = process.platform === "win32";
 const _DEBUG =
-  process.env.DEBUG ||
+  // eslint-disable-next-line dot-notation
+  process.env["DEBUG"] ||
   process.argv.map((arg) => arg.toLowerCase()).includes("--debug");
 const __FILENAME = _ISWIN
   ? import.meta.url.replace("file://", "").replace(/^\/(\w):/, "$1:")
