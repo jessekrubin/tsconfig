@@ -10,6 +10,7 @@ export default jsse(
     reportUnusedDisableDirectives: true,
     off: [],
     prettier: true,
+
     // gitignore: {
     //   files: [".gitignore"],
     //   strict: true,
@@ -19,10 +20,10 @@ export default jsse(
   /**
    * overrides
    */
-  // ...[
-  //   {
-  //     files: ["*.ts", "*.tsx"],
-  //     rules: {}
-  //   }
-  // ]
+  {
+    files: ["scripts/**", "dev/**"],
+    rules: {
+      "no-console": "off",
+    },
+  },
 );

@@ -87,6 +87,13 @@ async function main() {
     // const tsconfig = JSON.parse(await fs.readFile(tsconfigFile, 'utf-8'));
     console.log(tsconfigFile);
     pkg.exports[`./${tsconfigFile}`] = `./${tsconfigFile}`;
+    if (tsconfigFile !== "tsconfig.json") {
+      const tsconfigName = tsconfigFile
+        .replace(".json", "")
+        .replace("tsconfig.", "");
+      pkg.exports[`./${tsconfigName}`] = `./${tsconfigFile}`;
+      pkg.exports[`./${tsconfigName}.json`] = `./${tsconfigFile}`;
+    }
   }
 
   for (const [key, value] of Object.entries(pkg.exports)) {

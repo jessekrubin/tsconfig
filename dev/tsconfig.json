@@ -1,5 +1,5 @@
 {
-  "extends": "@jsse/tsconfig/tsconfig.json",
+  "extends": "@jsse/tsconfig/cjs",
   "compilerOptions": {
     "noEmit": true
   },

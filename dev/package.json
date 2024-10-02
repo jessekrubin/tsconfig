@@ -10,10 +10,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsc --showConfig"
   },
-  "dependencies": {},
   "devDependencies": {
     "@jsse/tsconfig": "file:..",
-    "tsx": "^4.7.1",
-    "typescript": "^5.4.5"
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2"
   }
 }

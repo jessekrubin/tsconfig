@@ -12,16 +12,19 @@
     "config"
   ],
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
-    },
+    ".": "./tsconfig.json",
     "./package.json": "./package.json",
     "./tsconfig.json": "./tsconfig.json",
     "./tsconfig.cjs.json": "./tsconfig.cjs.json",
     "./tsconfig.strict-cjs.json": "./tsconfig.strict-cjs.json",
-    "./tsconfig.strict.json": "./tsconfig.strict.json"
+    "./tsconfig.strict.json": "./tsconfig.strict.json",
+    "./cjs": "./tsconfig.cjs.json",
+    "./cjs.json": "./tsconfig.cjs.json",
+    "./strict-cjs": "./tsconfig.strict-cjs.json",
+    "./strict-cjs.json": "./tsconfig.strict-cjs.json",
+    "./strict": "./tsconfig.strict.json",
+    "./strict.json": "./tsconfig.strict.json",
+    "./*": "./*"
   },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -32,14 +35,13 @@
   "files": [
     "dist",
     "package.json",
-    "src",
     "tsconfig.cjs.json",
     "tsconfig.json",
     "tsconfig.strict-cjs.json",
     "tsconfig.strict.json"
   ],
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "scripts": {
     "build-fast": "pnpm run gen && tsup",
@@ -55,15 +57,15 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@jsse/eslint-config": "^0.2.1",
-    "@swc/core": "^1.7.6",
-    "@types/node": "^20.14.11",
-    "eslint": "^9.8.0",
+    "@jsse/eslint-config": "^0.2.18",
+    "@swc/core": "^1.7.26",
+    "@types/node": "^20.16.10",
+    "eslint": "^9.11.1",
     "prettier": "^3.3.3",
-    "tsup": "^8.2.4",
-    "tsx": "^4.16.5",
-    "typescript": "^5.5.3",
-    "vite": "^5.3.4",
-    "vitest": "^2.0.3"
+    "tsup": "^8.3.0",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.8",
+    "vitest": "^2.1.2"
   }
 }
