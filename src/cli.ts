@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /**
  * Possible CLI? TBD!
  */

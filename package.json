@@ -44,8 +44,7 @@
     "node": ">=20"
   },
   "scripts": {
-    "build-fast": "pnpm run gen && tsup",
-    "build": "pnpm run gen && tsup --dts",
+    "build": "pnpm run gen",
     "gen": "tsx scripts/update-pkg-json-exports.mts",
     "check": "eslint . && prettier --check .",
     "fmt": "prettier --write .",
