@@ -5,6 +5,7 @@
     "moduleDetection": "auto",
     "module": "commonjs",
     "moduleResolution": "node",
+    "outDir": "${configDir}/dist/cjs",
     "verbatimModuleSyntax": null
   }
 }

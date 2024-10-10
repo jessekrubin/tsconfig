@@ -22,7 +22,7 @@
     "declaration": true,
     "newLine": "lf",
     "noEmitOnError": true,
-    "outDir": "${configDir}/dist",
+    "outDir": "${configDir}/dist/esm",
     "sourceMap": true,
     "stripInternal": true,
     "esModuleInterop": true,
