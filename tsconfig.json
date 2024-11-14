@@ -1,9 +1,9 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "target": "ES2022",
+    "target": "es2022",
     "jsx": "react-jsx",
-    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "lib": ["dom", "dom.iterable", "es2022"],
     "moduleDetection": "force",
     "useDefineForClassFields": true,
     "baseUrl": "${configDir}",
