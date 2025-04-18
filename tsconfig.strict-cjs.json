@@ -2,9 +2,6 @@
   "$schema": "http://json.schemastore.org/tsconfig",
   "extends": "./tsconfig.cjs.json",
   "compilerOptions": {
-    "moduleDetection": "auto",
-    "module": "commonjs",
-    "moduleResolution": "node",
     "checkJs": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
