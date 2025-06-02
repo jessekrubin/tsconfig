@@ -56,7 +56,7 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@jsse/eslint-config": "^0.3.6",
+    "@jsse/eslint-config": "^0.4.0",
     "@swc/core": "^1.11.24",
     "@types/node": "^22.15.14",
     "eslint": "^9.26.0",
