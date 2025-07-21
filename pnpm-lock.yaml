@@ -40,7 +40,7 @@ importers:
         version: 3.2.4(@types/debug@4.1.12)(@types/node@24.0.10)(jiti@2.3.3)(tsx@4.20.3)(yaml@2.8.0)
       zx:
         specifier: ^8.5.5
-        version: 8.7.0
+        version: 8.7.1
 
 packages:
 
@@ -2578,8 +2578,8 @@ packages:
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
-  zx@8.7.0:
-    resolution: {integrity: sha512-pArftqj5JV/er8p+czFZwF+k6SbCldl7kcfCR+rIiDIh3gUsLB0F3Xh05diP8PzToZ39D/GWeFoVFimjHQkbAg==}
+  zx@8.7.1:
+    resolution: {integrity: sha512-28u1w2LlIfvyvJvYe6pmCipesk8oL5AFMVp+P/U445LcaPgzrU5lNDtAPd6nJvWmoCNyXZz37R/xKOGokccjsw==}
     engines: {node: '>= 12.17.0'}
     hasBin: true
 
@@ -5326,4 +5326,4 @@ snapshots:
 
   zwitch@2.0.4: {}
 
-  zx@8.7.0: {}
+  zx@8.7.1: {}
