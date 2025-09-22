@@ -159,7 +159,7 @@ async function main() {
   }
 
   // make sure that files is unique and sorted
-  pkg.files = [...new Set(pkg.files)].sort();
+  pkg.files = [...new Set(pkg.files)].toSorted();
   // files field in package.json
   if (JSON.stringify(pkg) === JSON.stringify(pkgOg)) {
     echo("No changes to package.json");

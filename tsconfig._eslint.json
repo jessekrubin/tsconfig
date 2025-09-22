@@ -1,6 +1,9 @@
 {
   "$schema": "http://json.schemastore.org/tsconfig",
   "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "lib": ["es2023"]
+  },
   "include": [
     "**/*.ts",
     "./*.cjs",
