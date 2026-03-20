@@ -41,7 +41,7 @@
     "tsconfig.strict.json"
   ],
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "scripts": {
     "build": "pnpm run gen",
@@ -56,16 +56,16 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@jsse/eslint-config": "^0.5.0",
-    "@swc/core": "^1.13.5",
+    "@jsse/eslint-config": "^0.7.0",
+    "@swc/core": "^1.15.18",
     "@types/node": "^24.7.0",
     "eslint": "^9.37.0",
-    "prettier": "^3.6.2",
-    "tsx": "^4.20.6",
+    "prettier": "^3.8.1",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3",
-    "vite": "^8.0.0",
-    "vitest": "^4.0.4",
-    "zx": "^8.8.4"
+    "vite": "^8.0.1",
+    "vitest": "^4.1.0",
+    "zx": "^8.8.5"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

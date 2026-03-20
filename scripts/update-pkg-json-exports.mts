@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import fs, { promises as fsp } from "node:fs";
+import { promises as fsp } from "node:fs";
 import path from "node:path";
 import process from "node:process";
 
 const _ISWIN = process.platform === "win32";
 const _DEBUG =
-  // eslint-disable-next-line dot-notation
   process.env["DEBUG"] ||
   process.argv.map((arg) => arg.toLowerCase()).includes("--debug");
 const __FILENAME = _ISWIN
@@ -40,11 +39,13 @@ type PackageJson = {
 };
 
 function echo(...args: any[]) {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   console.log(...args);
 }
 
 function debug(...args: any[]) {
   if (_DEBUG) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     console.log("_______\n[DEBUG]", ...args);
   }
 }
@@ -69,9 +70,12 @@ async function main() {
     PKG_JSON_FILEPATH,
   });
   const tsconfigFiles = await findTsconfigFiles();
-  const tsconfigs = tsconfigFiles.map((tsconfigFile) => {
-    return JSON.parse(fs.readFileSync(tsconfigFile, "utf8"));
-  });
+  const tsconfigs = await Promise.all(
+    tsconfigFiles.map(async (tsconfigFile) => {
+      const content = await fsp.readFile(tsconfigFile, "utf8");
+      return JSON.parse(content) as Record<string, any>;
+    }),
+  );
   echo(tsconfigs);
   echo(`Found ${tsconfigFiles.length} tsconfig files:`, tsconfigFiles);
   // read package.json
@@ -124,7 +128,7 @@ async function main() {
       echo(
         `EXPORT NOT FOUND ${tsconfigFile}: Removing ${tsconfigFile} from package.json exports.`,
       );
-      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+
       delete pkg.exports[key];
     }
   }
