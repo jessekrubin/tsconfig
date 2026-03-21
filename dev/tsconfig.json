@@ -1,8 +1,6 @@
 {
   "extends": "@jsse/tsconfig/cjs",
-  "compilerOptions": {
-    "noEmit": true
-  },
+  "compilerOptions": { "noEmit": true },
   "include": [
     "./**/*.ts",
     "./**/*.tsx",
