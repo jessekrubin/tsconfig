@@ -4,9 +4,7 @@ export default jsse(
   {
     ignores: ["**/dev"],
     debug: false,
-    typescript: {
-      tsconfig: "tsconfig._eslint.json",
-    },
+    typescript: { tsconfig: "tsconfig._eslint.json" },
     reportUnusedDisableDirectives: true,
     off: [],
     prettier: true,
@@ -20,10 +18,5 @@ export default jsse(
   /**
    * overrides
    */
-  {
-    files: ["scripts/**", "dev/**"],
-    rules: {
-      "no-console": "off",
-    },
-  },
+  { files: ["scripts/**", "dev/**"], rules: { "no-console": "off" } },
 );

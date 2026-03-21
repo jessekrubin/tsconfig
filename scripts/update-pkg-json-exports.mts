@@ -23,12 +23,7 @@ type PackageJson = {
   types: string;
   exports: Record<
     string,
-    | string
-    | {
-        types: string;
-        require: string;
-        import: string;
-      }
+    string | { types: string; require: string; import: string }
   >;
   files: string[];
   scripts: Record<string, string>;
@@ -115,12 +110,7 @@ async function main() {
         undefined,
         2,
       )}:`,
-      {
-        tsconfigFile,
-        tsconfigFilename,
-        tsconfigFilepath,
-        value,
-      },
+      { tsconfigFile, tsconfigFilename, tsconfigFilepath, value },
     );
 
     // if not in the tsconfigFiles, remove it from the exports

@@ -40,9 +40,9 @@
   "scripts": {
     "build": "pnpm run gen",
     "gen": "tsx scripts/update-pkg-json-exports.mts",
-    "check": "eslint . && prettier --check .",
-    "fmt": "prettier --write .",
-    "fmtc": "prettier --check .",
+    "check": "eslint . && prettier --check --object-wrap=collapse .",
+    "fmt": "prettier --write --object-wrap=collapse .",
+    "fmtc": "prettier --check --object-wrap=collapse .",
     "lint": "eslint .",
     "test": "vitest --run",
     "tsc": "tsc -p tsconfig.json",
