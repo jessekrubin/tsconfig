@@ -27,7 +27,6 @@
     "./*": "./*"
   },
   "files": [
-    "dist",
     "package.json",
     "tsconfig.cjs.json",
     "tsconfig.json",
