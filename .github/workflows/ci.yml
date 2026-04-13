@@ -70,7 +70,6 @@ jobs:
       - name: lint
         run: pnpm lint
 
-
   automerge:
     needs: [main]
     runs-on: ubuntu-latest
