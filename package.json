@@ -24,12 +24,16 @@
     "./strict-cjs.json": "./tsconfig.strict-cjs.json",
     "./strict": "./tsconfig.strict.json",
     "./strict.json": "./tsconfig.strict.json",
-    "./*": "./*"
+    "./*": "./*",
+    "./tsconfig.schema.json": "./tsconfig.schema.json",
+    "./schema": "./tsconfig.schema.json",
+    "./schema.json": "./tsconfig.schema.json"
   },
   "files": [
     "package.json",
     "tsconfig.cjs.json",
     "tsconfig.json",
+    "tsconfig.schema.json",
     "tsconfig.strict-cjs.json",
     "tsconfig.strict.json"
   ],
@@ -49,14 +53,18 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@jsse/eslint-config": "^0.7.0",
-    "@types/node": "^24.7.0",
-    "eslint": "^9.37.0",
-    "prettier": "^3.8.1",
+    "@jsse/eslint-config": "^0.7.1",
+    "@types/node": "^24.12.2",
+    "eslint": "^9.39.4",
+    "prettier": "^3.8.2",
     "publint": "^0.3.18",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "zx": "^8.8.5"
   },
-  "pnpm": {}
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
 }
