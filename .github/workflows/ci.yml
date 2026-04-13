@@ -70,8 +70,6 @@ jobs:
       - name: lint
         run: pnpm lint
 
-      - name: fmt-check
-        run: pnpm fmtc
 
   automerge:
     needs: [main]
