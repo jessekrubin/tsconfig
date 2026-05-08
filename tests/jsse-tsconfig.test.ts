@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import { describe, it } from "node:test";
+import { suite, test } from "node:test";
 import assert from "node:assert/strict";
 
 const TSCONFIG_FILES = [
@@ -9,19 +9,32 @@ const TSCONFIG_FILES = [
   "tsconfig.strict-cjs.json",
 ];
 
-describe("tsconfig files", () => {
+const TSCONFIG_SCHEMA_URL = "https://www.schemastore.org/tsconfig";
+suite("tsconfig files", () => {
   for (const file of TSCONFIG_FILES) {
-    describe(file, () => {
+    suite(file, () => {
       const raw = readFileSync(new URL(`../${file}`, import.meta.url), "utf8");
       const parsed = JSON.parse(raw) as Record<string, unknown>;
 
-      it("has $schema", () => {
+      test("has $schema", () => {
         assert.ok("$schema" in parsed, `missing $schema in ${file}`);
       });
 
-      it("$schema is first key", () => {
+      test("$schema is correct", () => {
+        assert.equal(
+          parsed.$schema,
+          TSCONFIG_SCHEMA_URL,
+          `$schema URL is incorrect in ${file} (got "${parsed.$schema}")`,
+        );
+      });
+
+      test("$schema is first key", () => {
         const firstKey = Object.keys(parsed)[0];
-        assert.equal(firstKey, "$schema", `$schema is not the first key in ${file} (got "${firstKey}")`);
+        assert.equal(
+          firstKey,
+          "$schema",
+          `$schema is not the first key in ${file} (got "${firstKey}")`,
+        );
       });
     });
   }
