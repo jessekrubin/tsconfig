@@ -23,7 +23,16 @@ export default jsse(
           allowForKnownSafeCalls: [
             {
               from: "package",
-              name: ["describe", "it", "test", "suite", "before", "after", "beforeEach", "afterEach"],
+              name: [
+                "describe",
+                "it",
+                "test",
+                "suite",
+                "before",
+                "after",
+                "beforeEach",
+                "afterEach",
+              ],
               package: "node:test",
             },
           ],
