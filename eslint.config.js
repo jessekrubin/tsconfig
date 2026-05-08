@@ -8,15 +8,36 @@ export default jsse(
     reportUnusedDisableDirectives: true,
     off: [],
     prettier: true,
-
-    // gitignore: {
-    //   files: [".gitignore"],
-    //   strict: true,
-    //   root: true
-    // }
   },
   /**
    * overrides
    */
   { files: ["scripts/**", "dev/**"], rules: { "no-console": "off" } },
+  {
+    files: ["tests/**/*.ts"],
+    rules: {
+      "no-console": "off",
+      "@typescript-eslint/no-floating-promises": [
+        "error",
+        {
+          allowForKnownSafeCalls: [
+            {
+              from: "package",
+              name: [
+                "describe",
+                "it",
+                "test",
+                "suite",
+                "before",
+                "after",
+                "beforeEach",
+                "afterEach",
+              ],
+              package: "node:test",
+            },
+          ],
+        },
+      ],
+    },
+  },
 );

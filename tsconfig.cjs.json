@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json.schemastore.org/tsconfig",
+  "$schema": "https://www.schemastore.org/tsconfig",
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "moduleDetection": "auto",

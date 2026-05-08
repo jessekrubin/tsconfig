@@ -9,7 +9,7 @@ importers:
   .:
     devDependencies:
       '@jsse/eslint-config':
-        specifier: ^0.7.1
+        specifier: ^0.7.3
         version: 0.7.3(@typescript-eslint/typescript-estree@8.59.1(typescript@6.0.3))(@typescript-eslint/utils@8.59.1(eslint@10.3.0)(typescript@6.0.3))(eslint@10.3.0)(typescript@6.0.3)
       '@types/node':
         specifier: ^24.12.2
