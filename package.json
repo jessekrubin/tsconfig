@@ -30,6 +30,8 @@
     "./schema.json": "./tsconfig.schema.json"
   },
   "files": [
+    "README.md",
+    "license",
     "package.json",
     "tsconfig.cjs.json",
     "tsconfig.json",
@@ -50,7 +52,7 @@
     "test": "node --test ./tests/jsse-tsconfig.test.ts",
     "tsc": "tsc -p tsconfig.json",
     "prepack": "npm run build",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit -p tsconfig.build.json"
   },
   "devDependencies": {
     "@jsse/eslint-config": "^0.7.3",

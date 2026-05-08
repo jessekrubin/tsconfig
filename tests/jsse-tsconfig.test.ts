@@ -16,15 +16,17 @@ suite("tsconfig files", () => {
       const raw = readFileSync(new URL(`../${file}`, import.meta.url), "utf8");
       const parsed = JSON.parse(raw) as Record<string, unknown>;
 
+      const schema_value = (parsed["$schema"] ?? "<UNDEFINED>") as string;
+
       test("has $schema", () => {
         assert.ok("$schema" in parsed, `missing $schema in ${file}`);
       });
 
       test("$schema is correct", () => {
         assert.equal(
-          parsed.$schema,
+          schema_value,
           TSCONFIG_SCHEMA_URL,
-          `$schema URL is incorrect in ${file} (got "${parsed.$schema}")`,
+          `$schema URL is incorrect in ${file} (got "${schema_value}")`,
         );
       });
 
