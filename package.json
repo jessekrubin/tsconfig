@@ -43,7 +43,7 @@
     "node": ">=22"
   },
   "scripts": {
-    "build": "pnpm run gen",
+    "build": "pnpm run gen && publint",
     "gen": "tsx scripts/update-pkg-json-exports.ts",
     "check": "eslint . && prettier --check --object-wrap=collapse .",
     "fmt": "prettier --write --object-wrap=collapse .",
