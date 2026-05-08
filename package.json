@@ -42,18 +42,18 @@
   },
   "scripts": {
     "build": "pnpm run gen",
-    "gen": "tsx scripts/update-pkg-json-exports.mts",
+    "gen": "tsx scripts/update-pkg-json-exports.ts",
     "check": "eslint . && prettier --check --object-wrap=collapse .",
     "fmt": "prettier --write --object-wrap=collapse .",
     "fmtc": "prettier --check --object-wrap=collapse .",
     "lint": "eslint .",
-    "test": "vitest --run",
+    "test": "node --test ./tests/jsse-tsconfig.test.ts",
     "tsc": "tsc -p tsconfig.json",
     "prepack": "npm run build",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@jsse/eslint-config": "^0.7.1",
+    "@jsse/eslint-config": "^0.7.3",
     "@types/node": "^24.12.2",
     "eslint": "^10.2.1",
     "prettier": "^3.8.3",

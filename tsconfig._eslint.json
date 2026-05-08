@@ -18,9 +18,8 @@
     "./.*.cjs",
     "./.eslintrc.cjs",
     "./.eslintrc.js",
-    "./example/*.mts",
-    "./scripts/**/*.mts",
-    "./scripts/**/*.ts"
+    "./scripts/**/*.ts",
+    "./tests/**/*.ts"
   ],
   "exclude": ["./fixtures/**/*.*"]
 }
