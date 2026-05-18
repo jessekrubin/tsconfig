@@ -22,7 +22,7 @@ importers:
         version: 3.8.3
       publint:
         specifier: ^0.3.18
-        version: 0.3.20
+        version: 0.3.21
       tsx:
         specifier: ^4.21.0
         version: 4.21.0
@@ -1116,8 +1116,8 @@ packages:
     engines: {node: '>=14'}
     hasBin: true
 
-  publint@0.3.20:
-    resolution: {integrity: sha512-UWqFYP7VBVCe9l/leEEGJrDs6Am4K4KapLmLi5qbt+9fA+Ny38ghdW+bw1nYfVqCK8/3kgsxjjhFjTYqYYRpyw==}
+  publint@0.3.21:
+    resolution: {integrity: sha512-OqejcnMV6E9zel2oCrUOJEiiFkGiAAni0A6ibfQNh1k9Gu5z4F+Yso8lllam7AzmV6Do0vp7u3UpZNRBwuXaHQ==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -2546,7 +2546,7 @@ snapshots:
 
   prettier@3.8.3: {}
 
-  publint@0.3.20:
+  publint@0.3.21:
     dependencies:
       '@publint/pack': 0.1.4
       package-manager-detector: 1.6.0
