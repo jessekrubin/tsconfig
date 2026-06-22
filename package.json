@@ -55,7 +55,7 @@
     "typecheck": "tsc --noEmit -p tsconfig.build.json"
   },
   "devDependencies": {
-    "@jsse/eslint-config": "^0.7.7",
+    "@jsse/eslint-config": "^0.8.0",
     "@types/node": "^24.13.1",
     "eslint": "^10.4.1",
     "prettier": "^3.8.4",
