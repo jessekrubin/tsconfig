@@ -45,6 +45,10 @@ function debug(...args: any[]) {
   }
 }
 
+function compareCodeUnits(a: string, b: string) {
+  return a < b ? -1 : a > b ? 1 : 0;
+}
+
 async function findTsconfigFiles() {
   const files = await fsp.readdir(".");
   return files.filter(
@@ -153,7 +157,7 @@ async function main() {
   }
 
   // make sure that files is unique and sorted
-  pkg.files = [...new Set(pkg.files)].toSorted((a, b) => a.localeCompare(b));
+  pkg.files = [...new Set(pkg.files)].toSorted(compareCodeUnits);
   // files field in package.json
   if (JSON.stringify(pkg) === JSON.stringify(pkgOg)) {
     echo("No changes to package.json");
