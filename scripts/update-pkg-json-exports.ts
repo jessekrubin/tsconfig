@@ -153,7 +153,7 @@ async function main() {
   }
 
   // make sure that files is unique and sorted
-  pkg.files = [...new Set(pkg.files)].toSorted();
+  pkg.files = [...new Set(pkg.files)].toSorted((a, b) => a.localeCompare(b));
   // files field in package.json
   if (JSON.stringify(pkg) === JSON.stringify(pkgOg)) {
     echo("No changes to package.json");
@@ -164,11 +164,12 @@ async function main() {
   }
 }
 
-main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(() => {
-    process.exit(0);
-  });
+try {
+  await main();
+} catch (e) {
+  console.error(e);
+  process.exit(1);
+} finally {
+  echo("Done.");
+  process.exit(0);
+}
