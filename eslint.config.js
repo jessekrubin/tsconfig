@@ -7,7 +7,7 @@ export default jsse(
     typescript: { tsconfig: "tsconfig._eslint.json" },
     reportUnusedDisableDirectives: true,
     off: [],
-    prettier: true,
+    sortPackageJson: true,
   },
   /**
    * overrides
