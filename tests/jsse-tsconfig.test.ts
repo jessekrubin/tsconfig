@@ -9,7 +9,7 @@ const TSCONFIG_FILES = [
   "tsconfig.strict-cjs.json",
 ];
 
-const TSCONFIG_SCHEMA_URL = "https://www.schemastore.org/tsconfig";
+const TSCONFIG_SCHEMA_URL = "https://www.schemastore.org/tsconfig.json";
 suite("tsconfig files", () => {
   for (const file of TSCONFIG_FILES) {
     suite(file, () => {
