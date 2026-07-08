@@ -32,6 +32,7 @@ function visitObjects(
 
 function removeKeys(obj: JsonObject, keysToRemove: string[]): void {
   for (const key of keysToRemove) {
+    // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
     delete obj[key];
   }
 }
@@ -52,6 +53,7 @@ function reorderKeys(
 function reorderKeysInplace(obj: JsonObject, keysOrdering: string[]): void {
   const ordered = reorderKeys(obj, keysOrdering);
   for (const key of Object.keys(obj)) {
+    // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
     delete obj[key];
   }
   for (const [key, value] of Object.entries(ordered)) {

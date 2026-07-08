@@ -123,6 +123,7 @@ async function main() {
         `EXPORT NOT FOUND ${tsconfigFile}: Removing ${tsconfigFile} from package.json exports.`,
       );
 
+      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
       delete pkg.exports[key];
     }
   }
@@ -133,9 +134,6 @@ async function main() {
    */
 
   // if not already in files, add it...
-  if (!pkg.files) {
-    pkg.files = [];
-  }
   for (const tsconfigFile of tsconfigFiles) {
     if (!pkg.files.includes(tsconfigFile)) {
       pkg.files.push(tsconfigFile);

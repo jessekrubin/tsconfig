@@ -4,10 +4,11 @@ export default jsse(
   {
     ignores: ["**/dev"],
     debug: false,
-    typescript: { tsconfig: "tsconfig._eslint.json" },
+    typescript: { strict: true, tsconfig: "tsconfig._eslint.json" },
     reportUnusedDisableDirectives: true,
     off: [],
     sortPackageJson: true,
+    nodeTest: true,
   },
   /**
    * overrides

@@ -35,6 +35,7 @@ suite("tsconfig files", () => {
         assert.equal(
           firstKey,
           "$schema",
+
           `$schema is not the first key in ${file} (got "${firstKey}")`,
         );
       });

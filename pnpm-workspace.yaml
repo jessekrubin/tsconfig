@@ -1,2 +1,9 @@
+# -----------------------------------------------------------------------------
+# REF:  https://pnpm.io/settings
+# -----------------------------------------------------------------------------
+
+minimumReleaseAge: 1440
+minimumReleaseAgeExclude:
+  - "@jsse/*"
 allowBuilds:
   esbuild: true
