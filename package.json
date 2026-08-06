@@ -14,6 +14,7 @@
     "README.md",
     "license",
     "package.json",
+    "tsconfig.bundler.json",
     "tsconfig.cjs.json",
     "tsconfig.json",
     "tsconfig.schema.json",
@@ -37,7 +38,10 @@
     "./*": "./*",
     "./tsconfig.schema.json": "./tsconfig.schema.json",
     "./schema": "./tsconfig.schema.json",
-    "./schema.json": "./tsconfig.schema.json"
+    "./schema.json": "./tsconfig.schema.json",
+    "./tsconfig.bundler.json": "./tsconfig.bundler.json",
+    "./bundler": "./tsconfig.bundler.json",
+    "./bundler.json": "./tsconfig.bundler.json"
   },
   "scripts": {
     "build": "pnpm run gen && pnpm run test && publint",
@@ -49,17 +53,24 @@
     "test": "node --test ./tests/jsse-tsconfig.test.ts",
     "tsc": "tsc -p tsconfig.json",
     "prepack": "npm run build",
-    "typecheck": "tsc --noEmit -p tsconfig.build.json"
+    "typecheck": "tsc --noEmit -p tsconfig._build.json"
   },
   "devDependencies": {
-    "@jsse/eslint-config": "^0.9.5",
-    "@types/node": "^24.13.2",
-    "eslint": "^10.6.0",
+    "@jsse/eslint-config": "^0.9.16",
+    "@types/node": "^24.13.3",
+    "eslint": "^10.8.0",
     "oxfmt": "^0.62.0",
-    "prettier": "^3.9.4",
-    "publint": "^0.3.21",
-    "tsx": "^4.23.0",
+    "prettier": "^3.9.6",
+    "publint": "^0.3.23",
+    "tsx": "^4.23.8",
     "typescript": "^6.0.3"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^11.20.0",
+      "onFail": "download"
+    }
   },
   "engines": {
     "node": ">=22"

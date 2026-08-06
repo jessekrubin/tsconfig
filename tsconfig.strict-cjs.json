@@ -1,10 +1,10 @@
 {
   "$schema": "https://www.schemastore.org/tsconfig.json",
+  "$id": "@jsse/tsconfig/strict-cjs",
   "extends": "./tsconfig.cjs.json",
   "compilerOptions": {
     "checkJs": true,
     "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "exactOptionalPropertyTypes": true
+    "allowUnusedLabels": false
   }
 }

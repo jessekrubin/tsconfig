@@ -1,15 +1,32 @@
-import { readFileSync } from "node:fs";
+import { readFileSync, globSync } from "node:fs";
 import { suite, test } from "node:test";
 import assert from "node:assert/strict";
 
 const TSCONFIG_FILES = [
-  "tsconfig.json",
+  "tsconfig.bundler.json",
   "tsconfig.cjs.json",
-  "tsconfig.strict.json",
+  "tsconfig.json",
   "tsconfig.strict-cjs.json",
+  "tsconfig.strict.json",
 ];
-
 const TSCONFIG_SCHEMA_URL = "https://www.schemastore.org/tsconfig.json";
+
+test("tsconfig files list is correct", () => {
+  const ignoredFiles = new Set([
+    "tsconfig.schema.json",
+    "tsconfig._eslint.json",
+    "tsconfig._build.json",
+  ]);
+  const files = globSync("tsconfig*.json", {
+    cwd: new URL("../", import.meta.url),
+  }).filter((file) => !ignoredFiles.has(file));
+  assert.deepEqual(
+    files.toSorted((a, b) => a.localeCompare(b)),
+    TSCONFIG_FILES.toSorted((a, b) => a.localeCompare(b)),
+    "tsconfig files list is incorrect",
+  );
+});
+
 suite("tsconfig files", () => {
   for (const file of TSCONFIG_FILES) {
     suite(file, () => {
@@ -38,6 +55,10 @@ suite("tsconfig files", () => {
 
           `$schema is not the first key in ${file} (got "${firstKey}")`,
         );
+      });
+
+      test("has $id", () => {
+        assert.ok("$id" in parsed, `missing $id in ${file}`);
       });
     });
   }
