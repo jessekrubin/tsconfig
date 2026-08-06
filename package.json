@@ -53,7 +53,7 @@
     "test": "node --test ./tests/jsse-tsconfig.test.ts",
     "tsc": "tsc -p tsconfig.json",
     "prepack": "npm run build",
-    "typecheck": "tsc --noEmit -p tsconfig.build.json"
+    "typecheck": "tsc --noEmit -p tsconfig._build.json"
   },
   "devDependencies": {
     "@jsse/eslint-config": "^0.9.5",
