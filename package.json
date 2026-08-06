@@ -56,13 +56,13 @@
     "typecheck": "tsc --noEmit -p tsconfig._build.json"
   },
   "devDependencies": {
-    "@jsse/eslint-config": "^0.9.5",
-    "@types/node": "^24.13.2",
-    "eslint": "^10.6.0",
+    "@jsse/eslint-config": "^0.9.16",
+    "@types/node": "^24.13.3",
+    "eslint": "^10.8.0",
     "oxfmt": "^0.62.0",
-    "prettier": "^3.9.4",
-    "publint": "^0.3.21",
-    "tsx": "^4.23.0",
+    "prettier": "^3.9.6",
+    "publint": "^0.3.23",
+    "tsx": "^4.23.8",
     "typescript": "^6.0.3"
   },
   "devEngines": {
