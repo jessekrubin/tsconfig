@@ -2,7 +2,17 @@ name: ci
 
 on:
   push:
+    branches:
+      - "main"
+    tags:
+      - "*"
   pull_request:
+    branches:
+      - "*"
+      - "*/*"
+      - "**"
+      - "main"
+  workflow_dispatch:
 
 jobs:
   fmtc:
@@ -31,16 +41,13 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v7
-
       - uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node-version }}
-      - uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6
-        name: Install pnpm
+      - name: pnpm-setup
+        uses: pnpm/setup@c9883cc79df532ad1a7b81bf9ab944ceb090d65c # v2
         with:
-          version: 11
-          run_install: false
-
+          install: false
       - name: pnpm-store-dir
         id: pnpm-store-dir
         shell: bash
