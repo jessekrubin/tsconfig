@@ -4,7 +4,6 @@
   "compilerOptions": {
     "checkJs": true,
     "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "exactOptionalPropertyTypes": true
+    "allowUnusedLabels": false
   }
 }

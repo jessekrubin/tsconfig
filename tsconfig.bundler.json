@@ -2,9 +2,9 @@
   "$schema": "https://www.schemastore.org/tsconfig.json",
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "checkJs": true,
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "skipLibCheck": true
+    "target": "esnext",
+    "lib": ["es2024"],
+    "allowImportingTsExtensions": true,
+    "noEmit": true
   }
 }
