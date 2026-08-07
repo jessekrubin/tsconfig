@@ -17,7 +17,7 @@ export type TsconfigModule =
   | "NodeNext"
   | "Preserve"
   | "None"
-  // Lowercase alternatives
+  // lowercase
   | "commonjs"
   | "amd"
   | "system"
@@ -50,7 +50,7 @@ export type TsconfigTarget =
   | "ES2024"
   | "ES2025"
   | "ESNext"
-  // Lowercase alternatives
+  // lowercase
   | "es3"
   | "es5"
   | "es6"
@@ -568,6 +568,12 @@ export type TsconfigCompilerOptions = {
    * @deprecated since TypeScript 6.0.
    */
   outFile?: string;
+
+  /**
+   * Deprecated setting.
+   * @deprecated Use `outFile` instead.
+   */
+  out?: string;
 
   /** Redirect output structure to the directory. */
   outDir?: string;
@@ -1092,6 +1098,9 @@ type PollingWatchKind =
   "FixedInterval" | "PriorityInterval" | "DynamicPriority" | "FixedChunkSize";
 
 export type TsconfigWatchOptions = {
+  /** Undocumented, unused by `tsc` itself. */
+  force?: string;
+
   /**
    * Specify the strategy for watching individual files.
    * @default "UseFsEvents"

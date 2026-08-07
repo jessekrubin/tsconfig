@@ -12,36 +12,32 @@
   "author": "jessekrubin <jessekrubin@gmail.com>",
   "files": [
     "README.md",
+    "dist",
     "license",
     "package.json",
     "tsconfig.bundler.json",
-    "tsconfig.cjs.json",
     "tsconfig.json",
     "tsconfig.schema.json",
-    "tsconfig.strict-cjs.json",
     "tsconfig.strict.json"
   ],
   "type": "module",
   "exports": {
     ".": "./tsconfig.json",
+    "./lib": {
+      "types": "./dist/mod.d.ts",
+      "import": "./dist/mod.js"
+    },
     "./package.json": "./package.json",
     "./tsconfig.json": "./tsconfig.json",
-    "./tsconfig.cjs.json": "./tsconfig.cjs.json",
-    "./tsconfig.strict-cjs.json": "./tsconfig.strict-cjs.json",
     "./tsconfig.strict.json": "./tsconfig.strict.json",
-    "./cjs": "./tsconfig.cjs.json",
-    "./cjs.json": "./tsconfig.cjs.json",
-    "./strict-cjs": "./tsconfig.strict-cjs.json",
-    "./strict-cjs.json": "./tsconfig.strict-cjs.json",
     "./strict": "./tsconfig.strict.json",
     "./strict.json": "./tsconfig.strict.json",
-    "./*": "./*",
-    "./tsconfig.schema.json": "./tsconfig.schema.json",
     "./schema": "./tsconfig.schema.json",
     "./schema.json": "./tsconfig.schema.json",
     "./tsconfig.bundler.json": "./tsconfig.bundler.json",
     "./bundler": "./tsconfig.bundler.json",
-    "./bundler.json": "./tsconfig.bundler.json"
+    "./bundler.json": "./tsconfig.bundler.json",
+    "./tsconfig.schema.json": "./tsconfig.schema.json"
   },
   "scripts": {
     "build": "pnpm run gen && pnpm run test && publint",
@@ -50,7 +46,7 @@
     "fmt": "prettier --write --object-wrap=collapse .",
     "fmtc": "prettier --check --object-wrap=collapse .",
     "lint": "eslint .",
-    "test": "node --test ./tests/jsse-tsconfig.test.ts",
+    "test": "node --test ./tests/jsse-tsconfig.test.ts && pnpm run typecheck",
     "tsc": "tsc -p tsconfig.json",
     "prepack": "npm run build",
     "typecheck": "tsc --noEmit -p tsconfig._build.json"
@@ -62,6 +58,7 @@
     "oxfmt": "^0.62.0",
     "prettier": "^3.9.6",
     "publint": "^0.3.23",
+    "tsdown": "^0.22.14",
     "tsx": "^4.23.8",
     "typescript": "^6.0.3"
   },

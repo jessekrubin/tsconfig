@@ -1,12 +1,10 @@
-import { readFileSync, globSync } from "node:fs";
-import { suite, test } from "node:test";
 import assert from "node:assert/strict";
+import { globSync, readFileSync } from "node:fs";
+import { suite, test } from "node:test";
 
 const TSCONFIG_FILES = [
   "tsconfig.bundler.json",
-  "tsconfig.cjs.json",
   "tsconfig.json",
-  "tsconfig.strict-cjs.json",
   "tsconfig.strict.json",
 ];
 const TSCONFIG_SCHEMA_URL = "https://www.schemastore.org/tsconfig.json";
