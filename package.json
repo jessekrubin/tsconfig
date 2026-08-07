@@ -17,6 +17,7 @@
     "package.json",
     "tsconfig.bundler.json",
     "tsconfig.json",
+    "tsconfig.node.json",
     "tsconfig.schema.json",
     "tsconfig.strict.json"
   ],
@@ -37,7 +38,10 @@
     "./tsconfig.bundler.json": "./tsconfig.bundler.json",
     "./bundler": "./tsconfig.bundler.json",
     "./bundler.json": "./tsconfig.bundler.json",
-    "./tsconfig.schema.json": "./tsconfig.schema.json"
+    "./tsconfig.schema.json": "./tsconfig.schema.json",
+    "./tsconfig.node.json": "./tsconfig.node.json",
+    "./node": "./tsconfig.node.json",
+    "./node.json": "./tsconfig.node.json"
   },
   "scripts": {
     "build": "pnpm run build:lib && pnpm run gen && pnpm run test && publint",

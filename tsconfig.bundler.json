@@ -3,8 +3,10 @@
   "$id": "@jsse/tsconfig/bundler",
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "rewriteRelativeImportExtensions": true,
     "target": "esnext",
     "lib": ["es2024"],
+    "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "noEmit": true
   }
