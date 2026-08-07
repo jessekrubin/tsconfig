@@ -49,7 +49,9 @@ jobs:
           cache-name: cache-pnpm-store
         with:
           path: ${{ env.PNPM_STORE_PATH }}
-          key: ${{ env.cache-name }}-${{ runner.os }}-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          key:
+            ${{ env.cache-name }}-${{ runner.os }}-${{ matrix.node-version
+            }}-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ env.cache-name }}-${{ runner.os }}-${{ matrix.node-version }}-
             ${{ env.cache-name }}-${{ runner.os }}-
