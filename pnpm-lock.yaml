@@ -210,6 +210,9 @@ importers:
       '@jsse/eslint-config':
         specifier: ^0.9.16
         version: 0.9.17(@typescript-eslint/typescript-estree@8.66.0(typescript@6.0.3))(@typescript-eslint/utils@8.66.0(eslint@10.8.0)(typescript@6.0.3))(eslint@10.8.0)(typescript@6.0.3)
+      '@jsse/prettier-config':
+        specifier: ^1.1.0
+        version: 1.1.0(prettier@3.9.6)
       '@types/node':
         specifier: ^24.13.3
         version: 24.13.3
@@ -500,6 +503,15 @@ packages:
       '@eslint-react/eslint-plugin':
         optional: true
       eslint-plugin-react-hooks:
+        optional: true
+
+  '@jsse/prettier-config@1.1.0':
+    resolution: {integrity: sha512-7KFQB2Foh84hXMjjN0Ot1XIFOSTX55gnA1b7r5SAZFZo3fVYV9bsZfnrA2cvoaK+PyzeiTb5gSGOrFlxXfu0Vg==}
+    peerDependencies:
+      '@prettier/plugin-oxc': ^0.2.0
+      prettier: ^3.8.0
+    peerDependenciesMeta:
+      '@prettier/plugin-oxc':
         optional: true
 
   '@ota-meshi/ast-token-store@0.3.0':
@@ -2251,6 +2263,10 @@ snapshots:
       - ts-declaration-location
       - typescript
       - vitest
+
+  '@jsse/prettier-config@1.1.0(prettier@3.9.6)':
+    dependencies:
+      prettier: 3.9.6
 
   '@ota-meshi/ast-token-store@0.3.0': {}
 
