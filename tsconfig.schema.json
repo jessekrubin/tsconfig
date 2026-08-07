@@ -1,8 +1,8 @@
 {
-  "type": "object",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "$comment": "Note that this schema uses 'null' in various places. The value of 'null' is UNDOCUMENTED (https://github.com/microsoft/TypeScript/pull/18058)",
-  "allowTrailingCommas": true,
+  "id": "https://json.schemastore.org/tsconfig",
+  "type": "object",
   "allOf": [
     { "$ref": "#/definitions/compilerOptionsDefinition" },
     { "$ref": "#/definitions/compileOnSaveDefinition" },
@@ -30,9 +30,9 @@
       "properties": {
         "files": {
           "type": ["array", "null"],
-          "description": "If no 'files' or 'include' property is present in a tsconfig.json, the compiler defaults to including all files in the containing directory and subdirectories except those specified by 'exclude'. When a 'files' property is specified, only those files and those specified by 'include' are included.\n\n---\n\nSpecifies an allowlist of files to include in the program. An error occurs if any of the files can't be found.\n\n```json tsconfig\n{\n  \"compilerOptions\": {},\n  \"files\": [\n    \"core.ts\",\n    \"sys.ts\",\n    \"types.ts\",\n    \"scanner.ts\",\n    \"parser.ts\",\n    \"utilities.ts\",\n    \"binder.ts\",\n    \"checker.ts\",\n    \"tsc.ts\"\n  ]\n}\n```\n\nThis is useful when you only have a small number of files and don't need to use a glob to reference many files.\nIf you need that then use [`include`](https://typescriptlang.org/tsconfig/#include).",
+          "items": { "type": "string" },
           "uniqueItems": true,
-          "items": { "type": "string" }
+          "description": "If no 'files' or 'include' property is present in a tsconfig.json, the compiler defaults to including all files in the containing directory and subdirectories except those specified by 'exclude'. When a 'files' property is specified, only those files and those specified by 'include' are included.\n\n---\n\nSpecifies an allowlist of files to include in the program. An error occurs if any of the files can't be found.\n\n```json tsconfig\n{\n  \"compilerOptions\": {},\n  \"files\": [\n    \"core.ts\",\n    \"sys.ts\",\n    \"types.ts\",\n    \"scanner.ts\",\n    \"parser.ts\",\n    \"utilities.ts\",\n    \"binder.ts\",\n    \"checker.ts\",\n    \"tsc.ts\"\n  ]\n}\n```\n\nThis is useful when you only have a small number of files and don't need to use a glob to reference many files.\nIf you need that then use [`include`](https://typescriptlang.org/tsconfig/#include)."
         }
       }
     },
@@ -40,9 +40,9 @@
       "properties": {
         "exclude": {
           "type": ["array", "null"],
-          "description": "Specifies a list of files to be excluded from compilation. The 'exclude' property only affects the files included via the 'include' property and not the 'files' property. Glob patterns require TypeScript version 2.0 or later.\n\n---\n\nSpecifies an array of filenames or patterns that should be skipped when resolving [`include`](https://typescriptlang.org/tsconfig/#include).\n\n**Important**: `exclude` _only_ changes which files are included as a result of the [`include`](https://typescriptlang.org/tsconfig/#include) setting.\nA file specified by `exclude` can still become part of your codebase due to an `import` statement in your code, a `types` inclusion, a `/// <reference` directive, or being specified in the [`files`](https://typescriptlang.org/tsconfig/#files) list.\n\nIt is not a mechanism that **prevents** a file from being included in the codebase - it simply changes what the [`include`](https://typescriptlang.org/tsconfig/#include) setting finds.",
+          "items": { "type": "string" },
           "uniqueItems": true,
-          "items": { "type": "string" }
+          "description": "Specifies a list of files to be excluded from compilation. The 'exclude' property only affects the files included via the 'include' property and not the 'files' property. Glob patterns require TypeScript version 2.0 or later.\n\n---\n\nSpecifies an array of filenames or patterns that should be skipped when resolving [`include`](https://typescriptlang.org/tsconfig/#include).\n\n**Important**: `exclude` _only_ changes which files are included as a result of the [`include`](https://typescriptlang.org/tsconfig/#include) setting.\nA file specified by `exclude` can still become part of your codebase due to an `import` statement in your code, a `types` inclusion, a `/// <reference` directive, or being specified in the [`files`](https://typescriptlang.org/tsconfig/#files) list.\n\nIt is not a mechanism that **prevents** a file from being included in the codebase - it simply changes what the [`include`](https://typescriptlang.org/tsconfig/#include) setting finds."
         }
       }
     },
@@ -50,9 +50,9 @@
       "properties": {
         "include": {
           "type": ["array", "null"],
-          "description": "Specifies a list of glob patterns that match files to be included in compilation. If no 'files' or 'include' property is present in a tsconfig.json, the compiler defaults to including all files in the containing directory and subdirectories except those specified by 'exclude'. Requires TypeScript version 2.0 or later.\n\n---\n\nSpecifies an array of filenames or patterns to include in the program.\nThese filenames are resolved relative to the directory containing the `tsconfig.json` file.\n\n```json\n{\n  \"include\": [\"src/**/*\", \"tests/**/*\"]\n}\n```\n\nWhich would include:\n\n<!-- TODO: #135\n```diff\n  .\n- ├── scripts\n- │   ├── lint.ts\n- │   ├── update_deps.ts\n- │   └── utils.ts\n+ ├── src\n+ │   ├── client\n+ │   │    ├── index.ts\n+ │   │    └── utils.ts\n+ │   ├── server\n+ │   │    └── index.ts\n+ ├── tests\n+ │   ├── app.test.ts\n+ │   ├── utils.ts\n+ │   └── tests.d.ts\n- ├── package.json\n- ├── tsconfig.json\n- └── yarn.lock\n``` -->\n\n```\n.\n├── scripts                ⨯\n│   ├── lint.ts            ⨯\n│   ├── update_deps.ts     ⨯\n│   └── utils.ts           ⨯\n├── src                    ✓\n│   ├── client             ✓\n│   │    ├── index.ts      ✓\n│   │    └── utils.ts      ✓\n│   ├── server             ✓\n│   │    └── index.ts      ✓\n├── tests                  ✓\n│   ├── app.test.ts        ✓\n│   ├── utils.ts           ✓\n│   └── tests.d.ts         ✓\n├── package.json\n├── tsconfig.json\n└── yarn.lock\n```\n\n`include` and `exclude` support wildcard characters to make glob patterns:\n\n- `*` matches zero or more characters (excluding directory separators)\n- `?` matches any one character (excluding directory separators)\n- `**/` matches any directory nested to any level\n\nIf the last path segment in a pattern does not contain a file extension or wildcard character, then it is treated as a directory, and files with supported extensions inside that directory are included (e.g. `.ts`, `.tsx`, and `.d.ts` by default, with `.js` and `.jsx` if [`allowJs`](https://typescriptlang.org/tsconfig/#allowJs) is set to true).",
+          "items": { "type": "string" },
           "uniqueItems": true,
-          "items": { "type": "string" }
+          "description": "Specifies a list of glob patterns that match files to be included in compilation. If no 'files' or 'include' property is present in a tsconfig.json, the compiler defaults to including all files in the containing directory and subdirectories except those specified by 'exclude'. Requires TypeScript version 2.0 or later.\n\n---\n\nSpecifies an array of filenames or patterns to include in the program.\nThese filenames are resolved relative to the directory containing the `tsconfig.json` file.\n\n```json\n{\n  \"include\": [\"src/**/*\", \"tests/**/*\"]\n}\n```\n\nWhich would include:\n\n<!-- TODO: #135\n```diff\n  .\n- ├── scripts\n- │   ├── lint.ts\n- │   ├── update_deps.ts\n- │   └── utils.ts\n+ ├── src\n+ │   ├── client\n+ │   │    ├── index.ts\n+ │   │    └── utils.ts\n+ │   ├── server\n+ │   │    └── index.ts\n+ ├── tests\n+ │   ├── app.test.ts\n+ │   ├── utils.ts\n+ │   └── tests.d.ts\n- ├── package.json\n- ├── tsconfig.json\n- └── yarn.lock\n``` -->\n\n```\n.\n├── scripts                ⨯\n│   ├── lint.ts            ⨯\n│   ├── update_deps.ts     ⨯\n│   └── utils.ts           ⨯\n├── src                    ✓\n│   ├── client             ✓\n│   │    ├── index.ts      ✓\n│   │    └── utils.ts      ✓\n│   ├── server             ✓\n│   │    └── index.ts      ✓\n├── tests                  ✓\n│   ├── app.test.ts        ✓\n│   ├── utils.ts           ✓\n│   └── tests.d.ts         ✓\n├── package.json\n├── tsconfig.json\n└── yarn.lock\n```\n\n`include` and `exclude` support wildcard characters to make glob patterns:\n\n- `*` matches zero or more characters (excluding directory separators)\n- `?` matches any one character (excluding directory separators)\n- `**/` matches any directory nested to any level\n\nIf the last path segment in a pattern does not contain a file extension or wildcard character, then it is treated as a directory, and files with supported extensions inside that directory are included (e.g. `.ts`, `.tsx`, and `.d.ts` by default, with `.js` and `.jsx` if [`allowJs`](https://typescriptlang.org/tsconfig/#allowJs) is set to true)."
         }
       }
     },
@@ -67,11 +67,11 @@
     "extendsDefinition": {
       "properties": {
         "extends": {
-          "description": "Path to base configuration file to inherit from. Requires TypeScript version 2.1 or later.\n\n---\n\nThe value of `extends` is a string which contains a path to another configuration file to inherit from.\nThe path may use Node.js style resolution.\n\nThe configuration from the base file are loaded first, then overridden by those in the inheriting config file. All relative paths found in the configuration file will be resolved relative to the configuration file they originated in.\n\nIt's worth noting that [`files`](https://typescriptlang.org/tsconfig/#files), [`include`](https://typescriptlang.org/tsconfig/#include), and [`exclude`](https://typescriptlang.org/tsconfig/#exclude) from the inheriting config file _overwrite_ those from the\nbase config file, and that circularity between configuration files is not allowed.\n\nCurrently, the only top-level property that is excluded from inheritance is [`references`](https://typescriptlang.org/tsconfig/#references).\n\n##### Example\n\n`configs/base.json`:\n\n```json tsconfig\n{\n  \"compilerOptions\": {\n    \"noImplicitAny\": true,\n    \"strictNullChecks\": true\n  }\n}\n```\n\n`tsconfig.json`:\n\n```json tsconfig\n{\n  \"extends\": \"./configs/base\",\n  \"files\": [\"main.ts\", \"supplemental.ts\"]\n}\n```\n\n`tsconfig.nostrictnull.json`:\n\n```json tsconfig\n{\n  \"extends\": \"./tsconfig\",\n  \"compilerOptions\": {\n    \"strictNullChecks\": false\n  }\n}\n```\n\nProperties with relative paths found in the configuration file, which aren't excluded from inheritance, will be resolved relative to the configuration file they originated in.",
           "oneOf": [
             { "type": "string", "default": "" },
-            { "type": "array", "default": [], "items": { "type": "string" } }
-          ]
+            { "type": "array", "items": { "type": "string" }, "default": [] }
+          ],
+          "description": "Path to base configuration file to inherit from. Requires TypeScript version 2.1 or later.\n\n---\n\nThe value of `extends` is a string which contains a path to another configuration file to inherit from.\nThe path may use Node.js style resolution.\n\nThe configuration from the base file are loaded first, then overridden by those in the inheriting config file. All relative paths found in the configuration file will be resolved relative to the configuration file they originated in.\n\nIt's worth noting that [`files`](https://typescriptlang.org/tsconfig/#files), [`include`](https://typescriptlang.org/tsconfig/#include), and [`exclude`](https://typescriptlang.org/tsconfig/#exclude) from the inheriting config file _overwrite_ those from the\nbase config file, and that circularity between configuration files is not allowed.\n\nCurrently, the only top-level property that is excluded from inheritance is [`references`](https://typescriptlang.org/tsconfig/#references).\n\n##### Example\n\n`configs/base.json`:\n\n```json tsconfig\n{\n  \"compilerOptions\": {\n    \"noImplicitAny\": true,\n    \"strictNullChecks\": true\n  }\n}\n```\n\n`tsconfig.json`:\n\n```json tsconfig\n{\n  \"extends\": \"./configs/base\",\n  \"files\": [\"main.ts\", \"supplemental.ts\"]\n}\n```\n\n`tsconfig.nostrictnull.json`:\n\n```json tsconfig\n{\n  \"extends\": \"./tsconfig\",\n  \"compilerOptions\": {\n    \"strictNullChecks\": false\n  }\n}\n```\n\nProperties with relative paths found in the configuration file, which aren't excluded from inheritance, will be resolved relative to the configuration file they originated in."
         }
       }
     },
@@ -117,7 +117,6 @@
       "properties": {
         "watchOptions": {
           "type": ["object", "null"],
-          "description": "Settings for the watch mode in TypeScript.",
           "properties": {
             "force": { "type": ["string", "null"], "description": "~" },
             "watchFile": {
@@ -138,17 +137,18 @@
             },
             "excludeFiles": {
               "type": ["array", "null"],
-              "description": "You can use `excludeFiles` to remove a set of specific files from the files which are watched.\n\n```json tsconfig\n{\n  \"watchOptions\": {\n    \"excludeFiles\": [\"temp/file.ts\"]\n  }\n}\n```",
+              "items": { "type": "string" },
               "uniqueItems": true,
-              "items": { "type": "string" }
+              "description": "You can use `excludeFiles` to remove a set of specific files from the files which are watched.\n\n```json tsconfig\n{\n  \"watchOptions\": {\n    \"excludeFiles\": [\"temp/file.ts\"]\n  }\n}\n```"
             },
             "excludeDirectories": {
               "type": ["array", "null"],
-              "description": "You can use [`excludeFiles`](https://typescriptlang.org/tsconfig/#excludeFiles) to drastically reduce the number of files which are watched during `--watch`. This can be a useful way to reduce the number of open file which TypeScript tracks on Linux.\n\n```json tsconfig\n{\n  \"watchOptions\": {\n    \"excludeDirectories\": [\"**/node_modules\", \"_build\", \"temp/*\"]\n  }\n}\n```",
+              "items": { "type": "string" },
               "uniqueItems": true,
-              "items": { "type": "string" }
+              "description": "You can use [`excludeFiles`](https://typescriptlang.org/tsconfig/#excludeFiles) to drastically reduce the number of files which are watched during `--watch`. This can be a useful way to reduce the number of open file which TypeScript tracks on Linux.\n\n```json tsconfig\n{\n  \"watchOptions\": {\n    \"excludeDirectories\": [\"**/node_modules\", \"_build\", \"temp/*\"]\n  }\n}\n```"
             }
-          }
+          },
+          "description": "Settings for the watch mode in TypeScript."
         }
       }
     },
@@ -156,7 +156,6 @@
       "properties": {
         "compilerOptions": {
           "type": ["object", "null"],
-          "description": "Instructs the TypeScript compiler how to compile .ts files.",
           "properties": {
             "allowArbitraryExtensions": {
               "type": ["boolean", "null"],
@@ -177,9 +176,9 @@
             },
             "customConditions": {
               "type": ["array", "null"],
-              "description": "`--customConditions` takes a list of additional [conditions](https://nodejs.org/api/packages.html#nested-conditions) that should succeed when TypeScript resolves from an [`exports`](https://nodejs.org/api/packages.html#exports) or [`imports`](https://nodejs.org/api/packages.html#imports) field of a `package.json`.\nThese conditions are added to whatever existing conditions a resolver will use by default.\n\nFor example, when this field is set in a `tsconfig.json` as so:\n\n```jsonc\n{\n    \"compilerOptions\": {\n        \"target\": \"es2022\",\n        \"moduleResolution\": \"bundler\",\n        \"customConditions\": [\"my-condition\"]\n    }\n}\n```\n\nAny time an `exports` or `imports` field is referenced in `package.json`, TypeScript will consider conditions called `my-condition`.\n\nSo when importing from a package with the following `package.json`\n\n```jsonc\n{\n    // ...\n    \"exports\": {\n        \".\": {\n            \"my-condition\": \"./foo.mjs\",\n            \"node\": \"./bar.mjs\",\n            \"import\": \"./baz.mjs\",\n            \"require\": \"./biz.mjs\"\n        }\n    }\n}\n```\n\nTypeScript will try to look for files corresponding to `foo.mjs`.\n\nThis field is only valid under the `node16`, `nodenext`, and `bundler` options for [`--moduleResolution`](https://typescriptlang.org/tsconfig/#moduleResolution).",
+              "items": { "type": "string" },
               "uniqueItems": true,
-              "items": { "type": "string" }
+              "description": "`--customConditions` takes a list of additional [conditions](https://nodejs.org/api/packages.html#nested-conditions) that should succeed when TypeScript resolves from an [`exports`](https://nodejs.org/api/packages.html#exports) or [`imports`](https://nodejs.org/api/packages.html#imports) field of a `package.json`.\nThese conditions are added to whatever existing conditions a resolver will use by default.\n\nFor example, when this field is set in a `tsconfig.json` as so:\n\n```jsonc\n{\n    \"compilerOptions\": {\n        \"target\": \"es2022\",\n        \"moduleResolution\": \"bundler\",\n        \"customConditions\": [\"my-condition\"]\n    }\n}\n```\n\nAny time an `exports` or `imports` field is referenced in `package.json`, TypeScript will consider conditions called `my-condition`.\n\nSo when importing from a package with the following `package.json`\n\n```jsonc\n{\n    // ...\n    \"exports\": {\n        \".\": {\n            \"my-condition\": \"./foo.mjs\",\n            \"node\": \"./bar.mjs\",\n            \"import\": \"./baz.mjs\",\n            \"require\": \"./biz.mjs\"\n        }\n    }\n}\n```\n\nTypeScript will try to look for files corresponding to `foo.mjs`.\n\nThis field is only valid under the `node16`, `nodenext`, and `bundler` options for [`--moduleResolution`](https://typescriptlang.org/tsconfig/#moduleResolution)."
             },
             "declaration": {
               "type": ["boolean", "null"],
@@ -272,13 +271,13 @@
               "description": "Specify the JSX fragment factory function to use when targeting react JSX emit with [`jsxFactory`](https://typescriptlang.org/tsconfig/#jsxFactory) compiler option is specified, e.g. `Fragment`.\n\nFor example with this TSConfig:\n\n```json tsconfig\n{\n  \"compilerOptions\": {\n    \"target\": \"esnext\",\n    \"module\": \"commonjs\",\n    \"jsx\": \"react\",\n    \"jsxFactory\": \"h\",\n    \"jsxFragmentFactory\": \"Fragment\"\n  }\n}\n```\n\nThis TSX file:\n\n```tsx\nimport { h, Fragment } from \"preact\";\n\nconst HelloWorld = () => (\n  <>\n    <div>Hello</div>\n  </>\n);\n```\n\nWould look like:\n\n```tsx twoslash\n// @showEmit\n// @showEmittedFile: index.js\n// @jsxFactory: h\n// @jsxFragmentFactory: Fragment\n// @noErrors\n// @target: esnext\n// @module: commonjs\n\nimport { h, Fragment } from \"preact\";\n\nconst HelloWorld = () => (\n  <>\n    <div>Hello</div>\n  </>\n);\n```\n\nThis option can be used on a per-file basis too similar to [Babel's `/* @jsxFrag h */` directive](https://babeljs.io/docs/en/babel-plugin-transform-react-jsx#fragments).\n\nFor example:\n\n```tsx twoslash\n/** @jsx h */\n/** @jsxFrag Fragment */\n\nimport { h, Fragment } from \"preact\";\n\nconst HelloWorld = () => (\n  <>\n    <div>Hello</div>\n  </>\n);\n```"
             },
             "jsxImportSource": {
-              "default": "react",
-              "description": "Declares the module specifier to be used for importing the `jsx` and `jsxs` factory functions when using [`jsx`](https://typescriptlang.org/tsconfig/#jsx) as `\"react-jsx\"` or `\"react-jsxdev\"` which were introduced in TypeScript 4.1.\n\nWhen using [@vitejs/plugin-vue-jsx](https://www.npmjs.com/package/@vitejs/plugin-vue-jsx), you can set this to `\"vue\"` for Vue JSX support.\n\nWith [React 17](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html) the library supports a new form of JSX transformation via a separate import.\n\nFor example with this code:\n\n```tsx\nimport React from \"react\";\n\nfunction App() {\n  return <h1>Hello World</h1>;\n}\n```\n\nUsing this TSConfig:\n\n```json tsconfig\n{\n  \"compilerOptions\": {\n    \"target\": \"esnext\",\n    \"module\": \"commonjs\",\n    \"jsx\": \"react-jsx\"\n  }\n}\n```\n\nThe emitted JavaScript from TypeScript is:\n\n```tsx twoslash\n// @showEmit\n// @noErrors\n// @jsx: react-jsx\n// @module: commonjs\n// @target: esnext\ndeclare module JSX {\n  interface Element {}\n  interface IntrinsicElements {\n    [s: string]: any;\n  }\n}\nimport React from \"react\";\n\nfunction App() {\n  return <h1>Hello World</h1>;\n}\n```\n\nFor example if you wanted to use `\"jsxImportSource\": \"preact\"`, you need a tsconfig like:\n\n```json tsconfig\n{\n  \"compilerOptions\": {\n    \"target\": \"esnext\",\n    \"module\": \"commonjs\",\n    \"jsx\": \"react-jsx\",\n    \"jsxImportSource\": \"preact\",\n    \"types\": [\"preact\"]\n  }\n}\n```\n\nWhich generates code like:\n\n```tsx twoslash\n// @showEmit\n// @jsxImportSource: preact\n// @types: preact\n// @jsx: react-jsx\n// @target: esnext\n// @module: commonjs\n// @noErrors\n\nexport function App() {\n  return <h1>Hello World</h1>;\n}\n```\n\nAlternatively, you can use a per-file pragma to set this option, for example:\n\n```tsx\n/** @jsxImportSource preact */\n\nexport function App() {\n  return <h1>Hello World</h1>;\n}\n```\n\nWould add `preact/jsx-runtime` as an import for the `_jsx` factory.\n\n_Note:_ In order for this to work like you would expect, your `tsx` file must include an `export` or `import` so that it is considered a module.",
               "anyOf": [
                 { "enum": ["react", "preact", "vue"] },
                 { "type": "string" },
                 { "type": "null" }
-              ]
+              ],
+              "default": "react",
+              "description": "Declares the module specifier to be used for importing the `jsx` and `jsxs` factory functions when using [`jsx`](https://typescriptlang.org/tsconfig/#jsx) as `\"react-jsx\"` or `\"react-jsxdev\"` which were introduced in TypeScript 4.1.\n\nWhen using [@vitejs/plugin-vue-jsx](https://www.npmjs.com/package/@vitejs/plugin-vue-jsx), you can set this to `\"vue\"` for Vue JSX support.\n\nWith [React 17](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html) the library supports a new form of JSX transformation via a separate import.\n\nFor example with this code:\n\n```tsx\nimport React from \"react\";\n\nfunction App() {\n  return <h1>Hello World</h1>;\n}\n```\n\nUsing this TSConfig:\n\n```json tsconfig\n{\n  \"compilerOptions\": {\n    \"target\": \"esnext\",\n    \"module\": \"commonjs\",\n    \"jsx\": \"react-jsx\"\n  }\n}\n```\n\nThe emitted JavaScript from TypeScript is:\n\n```tsx twoslash\n// @showEmit\n// @noErrors\n// @jsx: react-jsx\n// @module: commonjs\n// @target: esnext\ndeclare module JSX {\n  interface Element {}\n  interface IntrinsicElements {\n    [s: string]: any;\n  }\n}\nimport React from \"react\";\n\nfunction App() {\n  return <h1>Hello World</h1>;\n}\n```\n\nFor example if you wanted to use `\"jsxImportSource\": \"preact\"`, you need a tsconfig like:\n\n```json tsconfig\n{\n  \"compilerOptions\": {\n    \"target\": \"esnext\",\n    \"module\": \"commonjs\",\n    \"jsx\": \"react-jsx\",\n    \"jsxImportSource\": \"preact\",\n    \"types\": [\"preact\"]\n  }\n}\n```\n\nWhich generates code like:\n\n```tsx twoslash\n// @showEmit\n// @jsxImportSource: preact\n// @types: preact\n// @jsx: react-jsx\n// @target: esnext\n// @module: commonjs\n// @noErrors\n\nexport function App() {\n  return <h1>Hello World</h1>;\n}\n```\n\nAlternatively, you can use a per-file pragma to set this option, for example:\n\n```tsx\n/** @jsxImportSource preact */\n\nexport function App() {\n  return <h1>Hello World</h1>;\n}\n```\n\nWould add `preact/jsx-runtime` as an import for the `_jsx` factory.\n\n_Note:_ In order for this to work like you would expect, your `tsx` file must include an `export` or `import` so that it is considered a module."
             },
             "listFiles": {
               "type": ["boolean", "null"],
@@ -291,74 +290,57 @@
             },
             "module": {
               "type": ["string", "null"],
+              "enum": [
+                "commonjs",
+                "amd",
+                "system",
+                "umd",
+                "es6",
+                "es2015",
+                "es2020",
+                "esnext",
+                "none",
+                "es2022",
+                "node16",
+                "node18",
+                "node20",
+                "nodenext",
+                "preserve"
+              ],
               "default": "esnext",
-              "description": "Sets the module system for the program. See the [theory behind TypeScript’s `module` option](https://typescriptlang.org/docs/handbook/modules/theory.html#the-module-output-format) and [its reference page](https://typescriptlang.org/docs/handbook/modules/reference.html#the-module-compiler-option) for more information. You very likely want `\"nodenext\"` for modern Node.js projects and `preserve` or `esnext` for code that will be bundled.\n\nChanging `module` affects [`moduleResolution`](https://typescriptlang.org/tsconfig/#moduleResolution) which [also has a reference page](https://typescriptlang.org/docs/handbook/modules/reference.html#the-moduleresolution-compiler-option).\n\nHere's some example output for this file:\n\n```ts twoslash\n// @filename: constants.ts\nexport const valueOfPi = 3.142;\n// ---cut---\n// @filename: index.ts\nimport { valueOfPi } from \"./constants\";\n\nexport const twoPi = valueOfPi * 2;\n```\n\n#### `CommonJS`\n\n```ts twoslash\n// @showEmit\n// @module: commonjs\n// @noErrors\nimport { valueOfPi } from \"./constants\";\n\nexport const twoPi = valueOfPi * 2;\n```\n\n#### `UMD`\n\n```ts twoslash\n// @showEmit\n// @module: umd\n// @noErrors\nimport { valueOfPi } from \"./constants\";\n\nexport const twoPi = valueOfPi * 2;\n```\n\n#### `AMD`\n\n```ts twoslash\n// @showEmit\n// @module: amd\n// @noErrors\nimport { valueOfPi } from \"./constants\";\n\nexport const twoPi = valueOfPi * 2;\n```\n\n#### `System`\n\n```ts twoslash\n// @showEmit\n// @module: system\n// @noErrors\nimport { valueOfPi } from \"./constants\";\n\nexport const twoPi = valueOfPi * 2;\n```\n\n#### `ESNext`\n\n```ts twoslash\n// @showEmit\n// @module: esnext\n// @noErrors\nimport { valueOfPi } from \"./constants\";\n\nexport const twoPi = valueOfPi * 2;\n```\n\n#### `ES2015`/`ES6`/`ES2020`/`ES2022`\n\n```ts twoslash\n// @showEmit\n// @module: es2015\n// @noErrors\nimport { valueOfPi } from \"./constants\";\n\nexport const twoPi = valueOfPi * 2;\n```\n\nIn addition to the base functionality of `ES2015`/`ES6`, `ES2020` adds support for [dynamic `import`s](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import), and [`import.meta`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import.meta) while `ES2022` further adds support for [top level `await`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await#top_level_await).\n\n#### `node16`/`node18`/`node20`/`nodenext`\n\nThe `node16`, `node18`, `node20`, and `nodenext` modes integrate with Node's [native ECMAScript Module support](https://nodejs.org/api/esm.html). The emitted JavaScript uses either `CommonJS` or `ES2020` output depending on the file extension and the value of the `type` setting in the nearest `package.json`. Module resolution also works differently. You can learn more in the [handbook](https://typescriptlang.org/docs/handbook/esm-node.html) and [Modules Reference](https://typescriptlang.org/docs/handbook/modules/reference.html#node16-node18-node20-nodenext).\n\n- `node16` is available from TypeScript 4.7\n- `node18` is available from TypeScript 5.8 as a replacement for `node16`, with added support for import attributes.\n- `node20` adds support for require(ESM).\n- `nodenext` is available from TypeScript 4.7, but its behavior changes with the latest stable versions of Node.js. `--module nodenext` implies the floating `--target esnext`.\n\n#### `preserve`\n\nIn `--module preserve` ([added](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-4.html#support-for-require-calls-in---moduleresolution-bundler-and---module-preserve) in TypeScript 5.4), ECMAScript imports and exports written in input files are preserved in the output, and CommonJS-style `import x = require(\"...\")` and `export = ...` statements are emitted as CommonJS `require` and `module.exports`. In other words, the format of each individual import or export statement is preserved, rather than being coerced into a single format for the whole compilation (or even a whole file).\n\n```ts twoslash\n// @showEmit\n// @module: preserve\n// @noErrors\nimport { valueOfPi } from \"./constants\";\nimport constants = require(\"./constants\");\n\nexport const piSquared = valueOfPi * constants.valueOfPi;\n```\n\nWhile it’s rare to need to mix imports and require calls in the same file, this `module` mode best reflects the capabilities of most modern bundlers, as well as the Bun runtime.\n\n> Why care about TypeScript’s `module` emit with a bundler or with Bun, where you’re likely also setting `noEmit`? TypeScript’s type checking and module resolution behavior are affected by the module format that it _would_ emit. Setting `module` gives TypeScript information about how your bundler or runtime will process imports and exports, which ensures that the types you see on imported values accurately reflect what will happen at runtime or after bundling.\n\n#### `None`\n\n```ts twoslash\n// @showEmit\n// @module: none\n// @noErrors\nimport { valueOfPi } from \"./constants\";\n\nexport const twoPi = valueOfPi * 2;\n```\n\nAs of TypeScript 6.0, the default is `esnext`.",
-              "anyOf": [
-                {
-                  "enum": [
-                    "commonjs",
-                    "amd",
-                    "system",
-                    "umd",
-                    "es6",
-                    "es2015",
-                    "es2020",
-                    "esnext",
-                    "none",
-                    "es2022",
-                    "node16",
-                    "node18",
-                    "node20",
-                    "nodenext",
-                    "preserve"
-                  ]
-                },
-                {
-                  "pattern": "^([Cc][Oo][Mm][Mm][Oo][Nn][Jj][Ss]|[AaUu][Mm][Dd]|[Ss][Yy][Ss][Tt][Ee][Mm]|[Ee][Ss]([356]|20(1[567]|2[02])|[Nn][Ee][Xx][Tt])|[Nn][Oo][dD][Ee](1[68]|20)|[Nn][Oo][Dd][Ee][Nn][Ee][Xx][Tt]|[Nn][Oo][Nn][Ee]|[Pp][Rr][Ee][Ss][Ee][Rr][Vv][Ee])$"
-                }
-              ]
+              "description": "Sets the module system for the program. See the [theory behind TypeScript’s `module` option](https://typescriptlang.org/docs/handbook/modules/theory.html#the-module-output-format) and [its reference page](https://typescriptlang.org/docs/handbook/modules/reference.html#the-module-compiler-option) for more information. You very likely want `\"nodenext\"` for modern Node.js projects and `preserve` or `esnext` for code that will be bundled.\n\nChanging `module` affects [`moduleResolution`](https://typescriptlang.org/tsconfig/#moduleResolution) which [also has a reference page](https://typescriptlang.org/docs/handbook/modules/reference.html#the-moduleresolution-compiler-option).\n\nHere's some example output for this file:\n\n```ts twoslash\n// @filename: constants.ts\nexport const valueOfPi = 3.142;\n// ---cut---\n// @filename: index.ts\nimport { valueOfPi } from \"./constants\";\n\nexport const twoPi = valueOfPi * 2;\n```\n\n#### `CommonJS`\n\n```ts twoslash\n// @showEmit\n// @module: commonjs\n// @noErrors\nimport { valueOfPi } from \"./constants\";\n\nexport const twoPi = valueOfPi * 2;\n```\n\n#### `UMD`\n\n```ts twoslash\n// @showEmit\n// @module: umd\n// @noErrors\nimport { valueOfPi } from \"./constants\";\n\nexport const twoPi = valueOfPi * 2;\n```\n\n#### `AMD`\n\n```ts twoslash\n// @showEmit\n// @module: amd\n// @noErrors\nimport { valueOfPi } from \"./constants\";\n\nexport const twoPi = valueOfPi * 2;\n```\n\n#### `System`\n\n```ts twoslash\n// @showEmit\n// @module: system\n// @noErrors\nimport { valueOfPi } from \"./constants\";\n\nexport const twoPi = valueOfPi * 2;\n```\n\n#### `ESNext`\n\n```ts twoslash\n// @showEmit\n// @module: esnext\n// @noErrors\nimport { valueOfPi } from \"./constants\";\n\nexport const twoPi = valueOfPi * 2;\n```\n\n#### `ES2015`/`ES6`/`ES2020`/`ES2022`\n\n```ts twoslash\n// @showEmit\n// @module: es2015\n// @noErrors\nimport { valueOfPi } from \"./constants\";\n\nexport const twoPi = valueOfPi * 2;\n```\n\nIn addition to the base functionality of `ES2015`/`ES6`, `ES2020` adds support for [dynamic `import`s](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import), and [`import.meta`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import.meta) while `ES2022` further adds support for [top level `await`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await#top_level_await).\n\n#### `node16`/`node18`/`node20`/`nodenext`\n\nThe `node16`, `node18`, `node20`, and `nodenext` modes integrate with Node's [native ECMAScript Module support](https://nodejs.org/api/esm.html). The emitted JavaScript uses either `CommonJS` or `ES2020` output depending on the file extension and the value of the `type` setting in the nearest `package.json`. Module resolution also works differently. You can learn more in the [handbook](https://typescriptlang.org/docs/handbook/esm-node.html) and [Modules Reference](https://typescriptlang.org/docs/handbook/modules/reference.html#node16-node18-node20-nodenext).\n\n- `node16` is available from TypeScript 4.7\n- `node18` is available from TypeScript 5.8 as a replacement for `node16`, with added support for import attributes.\n- `node20` adds support for require(ESM).\n- `nodenext` is available from TypeScript 4.7, but its behavior changes with the latest stable versions of Node.js. `--module nodenext` implies the floating `--target esnext`.\n\n#### `preserve`\n\nIn `--module preserve` ([added](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-4.html#support-for-require-calls-in---moduleresolution-bundler-and---module-preserve) in TypeScript 5.4), ECMAScript imports and exports written in input files are preserved in the output, and CommonJS-style `import x = require(\"...\")` and `export = ...` statements are emitted as CommonJS `require` and `module.exports`. In other words, the format of each individual import or export statement is preserved, rather than being coerced into a single format for the whole compilation (or even a whole file).\n\n```ts twoslash\n// @showEmit\n// @module: preserve\n// @noErrors\nimport { valueOfPi } from \"./constants\";\nimport constants = require(\"./constants\");\n\nexport const piSquared = valueOfPi * constants.valueOfPi;\n```\n\nWhile it’s rare to need to mix imports and require calls in the same file, this `module` mode best reflects the capabilities of most modern bundlers, as well as the Bun runtime.\n\n> Why care about TypeScript’s `module` emit with a bundler or with Bun, where you’re likely also setting `noEmit`? TypeScript’s type checking and module resolution behavior are affected by the module format that it _would_ emit. Setting `module` gives TypeScript information about how your bundler or runtime will process imports and exports, which ensures that the types you see on imported values accurately reflect what will happen at runtime or after bundling.\n\n#### `None`\n\n```ts twoslash\n// @showEmit\n// @module: none\n// @noErrors\nimport { valueOfPi } from \"./constants\";\n\nexport const twoPi = valueOfPi * 2;\n```\n\nAs of TypeScript 6.0, the default is `esnext`."
             },
             "moduleResolution": {
               "type": ["string", "null"],
+              "enum": [
+                "classic",
+                "node",
+                "node10",
+                "node16",
+                "nodenext",
+                "bundler"
+              ],
               "description": "Specify the module resolution strategy:\n\n- `'node16'` or `'nodenext'` for modern versions of Node.js. Node.js v12 and later supports both ECMAScript imports and CommonJS `require`, which resolve using different algorithms. These `moduleResolution` values, when combined with the corresponding [`module`](https://typescriptlang.org/tsconfig/#module) values, picks the right algorithm for each resolution based on whether Node.js will see an `import` or `require` in the output JavaScript code.\n- `'node10'` (previously called `'node'`) for Node.js versions older than v10, which only support CommonJS `require`. You probably won't need to use `node10` in modern code.\n- `'bundler'` for use with bundlers. Like `node16` and `nodenext`, this mode supports package.json `\"imports\"` and `\"exports\"`, but unlike the Node.js resolution modes, `bundler` never requires file extensions on relative paths in imports.\n- `'classic'` was used in TypeScript before the release of 1.6. `classic` should not be used.\n\nThere are reference pages explaining the [theory behind TypeScript’s module resolution](https://www.typescriptlang.org/docs/handbook/modules/theory.html#module-resolution) and the [details of each option](https://typescriptlang.org/docs/handbook/modules/reference.html#the-moduleresolution-compiler-option).",
-              "anyOf": [
-                {
-                  "enum": [
-                    "classic",
-                    "node",
-                    "node10",
-                    "node16",
-                    "nodenext",
-                    "bundler"
-                  ],
-                  "markdownEnumDescriptions": [
-                    "It’s recommended to use `\"node16\"` instead",
-                    "Deprecated, use `\"node10\"` in TypeScript 5.0+ instead",
-                    "It’s recommended to use `\"node16\"` instead",
-                    "This is the recommended setting for libraries and Node.js applications",
-                    "This is the recommended setting for libraries and Node.js applications",
-                    "This is the recommended setting in TypeScript 5.0+ for applications that use a bundler"
-                  ]
-                },
-                {
-                  "pattern": "^(([Nn]ode)|([Nn]ode1[06])|([Nn]ode[Nn]ext)|([Cc]lassic)|([Bb]undler))$"
-                }
+              "markdownEnumDescriptions": [
+                "It’s recommended to use `\"node16\"` instead",
+                "Deprecated, use `\"node10\"` in TypeScript 5.0+ instead",
+                "It’s recommended to use `\"node16\"` instead",
+                "This is the recommended setting for libraries and Node.js applications",
+                "This is the recommended setting for libraries and Node.js applications",
+                "This is the recommended setting in TypeScript 5.0+ for applications that use a bundler"
               ]
             },
             "moduleSuffixes": {
               "type": ["array", "null"],
-              "description": "Provides a way to override the default list of file name suffixes to search when resolving a module.\n\n```json tsconfig\n{\n    \"compilerOptions\": {\n        \"moduleSuffixes\": [\".ios\", \".native\", \"\"]\n    }\n}\n```\n\nGiven the above configuration, an import like the following:\n\n```ts\nimport * as foo from \"./foo\";\n```\n\nTypeScript will look for the relative files `./foo.ios.ts`, `./foo.native.ts`, and finally `./foo.ts`.\n\nNote the empty string `\"\"` in [`moduleSuffixes`](https://typescriptlang.org/tsconfig/#moduleSuffixes) which is necessary for TypeScript to also look-up `./foo.ts`.\n\nThis feature can be useful for React Native projects where each target platform can use a separate tsconfig.json with differing `moduleSuffixes`.",
+              "items": { "type": "string" },
               "uniqueItems": true,
-              "items": { "type": "string" }
+              "description": "Provides a way to override the default list of file name suffixes to search when resolving a module.\n\n```json tsconfig\n{\n    \"compilerOptions\": {\n        \"moduleSuffixes\": [\".ios\", \".native\", \"\"]\n    }\n}\n```\n\nGiven the above configuration, an import like the following:\n\n```ts\nimport * as foo from \"./foo\";\n```\n\nTypeScript will look for the relative files `./foo.ios.ts`, `./foo.native.ts`, and finally `./foo.ts`.\n\nNote the empty string `\"\"` in [`moduleSuffixes`](https://typescriptlang.org/tsconfig/#moduleSuffixes) which is necessary for TypeScript to also look-up `./foo.ts`.\n\nThis feature can be useful for React Native projects where each target platform can use a separate tsconfig.json with differing `moduleSuffixes`."
             },
             "newLine": {
               "type": ["string", "null"],
+              "enum": ["crlf", "lf"],
               "default": "lf",
-              "description": "Specify the end of line sequence to be used when emitting files: 'CRLF' (dos) or 'LF' (unix).",
-              "anyOf": [
-                { "enum": ["crlf", "lf"] },
-                { "pattern": "^(CRLF|LF|crlf|lf)$" }
-              ]
+              "description": "Specify the end of line sequence to be used when emitting files: 'CRLF' (dos) or 'LF' (unix)."
             },
             "noEmit": {
               "type": ["boolean", "null"],
@@ -499,32 +481,25 @@
             },
             "target": {
               "type": ["string", "null"],
+              "enum": [
+                "es3",
+                "es5",
+                "es6",
+                "es2015",
+                "es2016",
+                "es2017",
+                "es2018",
+                "es2019",
+                "es2020",
+                "es2021",
+                "es2022",
+                "es2023",
+                "es2024",
+                "es2025",
+                "esnext"
+              ],
               "default": "es2025",
-              "description": "Modern browsers support all ES6 features, so `ES6` is a good choice.\nYou might choose to set a lower target if your code is deployed to older environments, or a higher target if your code is guaranteed to run in newer environments.\n\nThe `target` setting changes which JS features are downleveled and which are left intact.\nFor example, an arrow function `() => this` will be turned into an equivalent `function` expression if `target` is ES5 or lower.\n\nChanging `target` also changes the default value of [`lib`](https://typescriptlang.org/tsconfig/#lib).\nYou may \"mix and match\" `target` and `lib` settings as desired, but you could just set `target` for convenience.\n\nFor developer platforms like Node there are baselines for the `target`, depending on the type of platform and its version. You can find a set of community organized TSConfigs at [tsconfig/bases](https://github.com/tsconfig/bases#centralized-recommendations-for-tsconfig-bases), which has configurations for common platforms and their versions.\n\nThe special `ESNext` value refers to the highest version your version of TypeScript supports.\nThis setting should be used with caution, since it doesn't mean the same thing between different TypeScript versions and can make upgrades less predictable.\n\nAs of TypeScript 6.0, the default is `es2025`, which advances alongside the ECMAScript standard.",
-              "anyOf": [
-                {
-                  "enum": [
-                    "es3",
-                    "es5",
-                    "es6",
-                    "es2015",
-                    "es2016",
-                    "es2017",
-                    "es2018",
-                    "es2019",
-                    "es2020",
-                    "es2021",
-                    "es2022",
-                    "es2023",
-                    "es2024",
-                    "es2025",
-                    "esnext"
-                  ]
-                },
-                {
-                  "pattern": "^([Ee][Ss]([356]|(20(1[56789]|2[012345]))|[Nn][Ee][Xx][Tt]))$"
-                }
-              ]
+              "description": "Modern browsers support all ES6 features, so `ES6` is a good choice.\nYou might choose to set a lower target if your code is deployed to older environments, or a higher target if your code is guaranteed to run in newer environments.\n\nThe `target` setting changes which JS features are downleveled and which are left intact.\nFor example, an arrow function `() => this` will be turned into an equivalent `function` expression if `target` is ES5 or lower.\n\nChanging `target` also changes the default value of [`lib`](https://typescriptlang.org/tsconfig/#lib).\nYou may \"mix and match\" `target` and `lib` settings as desired, but you could just set `target` for convenience.\n\nFor developer platforms like Node there are baselines for the `target`, depending on the type of platform and its version. You can find a set of community organized TSConfigs at [tsconfig/bases](https://github.com/tsconfig/bases#centralized-recommendations-for-tsconfig-bases), which has configurations for common platforms and their versions.\n\nThe special `ESNext` value refers to the highest version your version of TypeScript supports.\nThis setting should be used with caution, since it doesn't mean the same thing between different TypeScript versions and can make upgrades less predictable.\n\nAs of TypeScript 6.0, the default is `es2025`, which advances alongside the ECMAScript standard."
             },
             "useUnknownInCatchVariables": {
               "type": ["boolean", "null"],
@@ -620,44 +595,44 @@
             },
             "paths": {
               "type": ["object", "null"],
-              "description": "A series of entries which re-map imports to lookup locations relative to the [`baseUrl`](https://typescriptlang.org/tsconfig/#baseUrl) if set, or to the tsconfig file itself otherwise. There is a larger coverage of `paths` in [the `moduleResolution` reference page](https://typescriptlang.org/docs/handbook/modules/reference.html#paths).\n\n`paths` lets you declare how TypeScript should resolve an import in your `require`/`import`s.\n\n```json tsconfig\n{\n  \"compilerOptions\": {\n    \"paths\": {\n      \"jquery\": [\"./vendor/jquery/dist/jquery\"]\n    }\n  }\n}\n```\n\nThis would allow you to be able to write `import \"jquery\"`, and get all of the correct typing locally.\n\n```json tsconfig\n{\n  \"compilerOptions\": {\n    \"paths\": {\n        \"app/*\": [\"./src/app/*\"],\n        \"config/*\": [\"./src/app/_config/*\"],\n        \"environment/*\": [\"./src/environments/*\"],\n        \"shared/*\": [\"./src/app/_shared/*\"],\n        \"helpers/*\": [\"./src/helpers/*\"],\n        \"tests/*\": [\"./src/tests/*\"]\n    }\n  }\n}\n```\n\nIn this case, you can tell the TypeScript file resolver to support a number of custom prefixes to find code.\n\nNote that this feature does not change how import paths are emitted by `tsc`, so `paths` should only be used to inform TypeScript that another tool has this mapping and will use it at runtime or when bundling.",
               "additionalProperties": {
                 "type": ["array", "null"],
-                "uniqueItems": true,
                 "items": {
                   "type": "string",
                   "description": "An array of paths to use as alternatives when resolving this module import."
-                }
-              }
+                },
+                "uniqueItems": true
+              },
+              "description": "A series of entries which re-map imports to lookup locations relative to the [`baseUrl`](https://typescriptlang.org/tsconfig/#baseUrl) if set, or to the tsconfig file itself otherwise. There is a larger coverage of `paths` in [the `moduleResolution` reference page](https://typescriptlang.org/docs/handbook/modules/reference.html#paths).\n\n`paths` lets you declare how TypeScript should resolve an import in your `require`/`import`s.\n\n```json tsconfig\n{\n  \"compilerOptions\": {\n    \"paths\": {\n      \"jquery\": [\"./vendor/jquery/dist/jquery\"]\n    }\n  }\n}\n```\n\nThis would allow you to be able to write `import \"jquery\"`, and get all of the correct typing locally.\n\n```json tsconfig\n{\n  \"compilerOptions\": {\n    \"paths\": {\n        \"app/*\": [\"./src/app/*\"],\n        \"config/*\": [\"./src/app/_config/*\"],\n        \"environment/*\": [\"./src/environments/*\"],\n        \"shared/*\": [\"./src/app/_shared/*\"],\n        \"helpers/*\": [\"./src/helpers/*\"],\n        \"tests/*\": [\"./src/tests/*\"]\n    }\n  }\n}\n```\n\nIn this case, you can tell the TypeScript file resolver to support a number of custom prefixes to find code.\n\nNote that this feature does not change how import paths are emitted by `tsc`, so `paths` should only be used to inform TypeScript that another tool has this mapping and will use it at runtime or when bundling."
             },
             "plugins": {
               "type": ["array", "null"],
-              "description": "List of language service plugins to run inside the editor.\n\nLanguage service plugins are a way to provide additional information to a user based on existing TypeScript files. They can enhance existing messages between TypeScript and an editor, or to provide their own error messages.\n\nFor example:\n\n- [ts-sql-plugin](https://github.com/xialvjun/ts-sql-plugin#readme) &mdash; Adds SQL linting with a template strings SQL builder.\n- [typescript-styled-plugin](https://github.com/Microsoft/typescript-styled-plugin) &mdash; Provides CSS linting inside template strings .\n- [typescript-eslint-language-service](https://github.com/Quramy/typescript-eslint-language-service) &mdash; Provides eslint error messaging and fix-its inside the compiler's output.\n- [ts-graphql-plugin](https://github.com/Quramy/ts-graphql-plugin) &mdash; Provides validation and auto-completion inside GraphQL query template strings.\n\nVS Code has the ability for a extension to [automatically include language service plugins](https://code.visualstudio.com/api/references/contribution-points#contributes.typescriptServerPlugins), and so you may have some running in your editor without needing to define them in your `tsconfig.json`.",
               "items": {
                 "type": "object",
                 "properties": {
                   "name": { "type": "string", "description": "Plugin name." }
                 }
-              }
+              },
+              "description": "List of language service plugins to run inside the editor.\n\nLanguage service plugins are a way to provide additional information to a user based on existing TypeScript files. They can enhance existing messages between TypeScript and an editor, or to provide their own error messages.\n\nFor example:\n\n- [ts-sql-plugin](https://github.com/xialvjun/ts-sql-plugin#readme) &mdash; Adds SQL linting with a template strings SQL builder.\n- [typescript-styled-plugin](https://github.com/Microsoft/typescript-styled-plugin) &mdash; Provides CSS linting inside template strings .\n- [typescript-eslint-language-service](https://github.com/Quramy/typescript-eslint-language-service) &mdash; Provides eslint error messaging and fix-its inside the compiler's output.\n- [ts-graphql-plugin](https://github.com/Quramy/ts-graphql-plugin) &mdash; Provides validation and auto-completion inside GraphQL query template strings.\n\nVS Code has the ability for a extension to [automatically include language service plugins](https://code.visualstudio.com/api/references/contribution-points#contributes.typescriptServerPlugins), and so you may have some running in your editor without needing to define them in your `tsconfig.json`."
             },
             "rootDirs": {
               "type": ["array", "null"],
-              "description": "Using `rootDirs`, you can inform the compiler that there are many \"virtual\" directories acting as a single root.\nThis allows the compiler to resolve relative module imports within these \"virtual\" directories, as if they were merged in to one directory.\n\nFor example:\n\n```\n src\n └── views\n     └── view1.ts (can import \"./template1\", \"./view2`)\n     └── view2.ts (can import \"./template1\", \"./view1`)\n\n generated\n └── templates\n         └── views\n             └── template1.ts (can import \"./view1\", \"./view2\")\n```\n\n```json tsconfig\n{\n  \"compilerOptions\": {\n    \"rootDirs\": [\"src/views\", \"generated/templates/views\"]\n  }\n}\n```\n\nThis does not affect how TypeScript emits JavaScript, it only emulates the assumption that they will be able to\nwork via those relative paths at runtime.\n\n`rootDirs` can be used to provide a separate \"type layer\" to files that are not TypeScript or JavaScript by providing a home for generated `.d.ts` files in another folder. This technique is useful for bundled applications where you use `import` of files that aren't necessarily code:\n\n```sh\n src\n └── index.ts\n └── css\n     └── main.css\n     └── navigation.css\n\n generated\n └── css\n     └── main.css.d.ts\n     └── navigation.css.d.ts\n```\n\n```json tsconfig\n{\n  \"compilerOptions\": {\n    \"rootDirs\": [\"src\", \"generated\"]\n  }\n}\n```\n\nThis technique lets you generate types ahead of time for the non-code source files. Imports then work naturally based off the source file's location.\nFor example `./src/index.ts` can import the file `./src/css/main.css` and TypeScript will be aware of the bundler's behavior for that filetype via the corresponding generated declaration file.\n\n```ts twoslash\n// @filename: main.css.d.ts\nexport const appClass = \"mainClassF3EC2\";\n// ---cut---\n// @filename: index.ts\nimport { appClass } from \"./main.css\";\n```",
+              "items": { "type": "string" },
               "uniqueItems": true,
-              "items": { "type": "string" }
+              "description": "Using `rootDirs`, you can inform the compiler that there are many \"virtual\" directories acting as a single root.\nThis allows the compiler to resolve relative module imports within these \"virtual\" directories, as if they were merged in to one directory.\n\nFor example:\n\n```\n src\n └── views\n     └── view1.ts (can import \"./template1\", \"./view2`)\n     └── view2.ts (can import \"./template1\", \"./view1`)\n\n generated\n └── templates\n         └── views\n             └── template1.ts (can import \"./view1\", \"./view2\")\n```\n\n```json tsconfig\n{\n  \"compilerOptions\": {\n    \"rootDirs\": [\"src/views\", \"generated/templates/views\"]\n  }\n}\n```\n\nThis does not affect how TypeScript emits JavaScript, it only emulates the assumption that they will be able to\nwork via those relative paths at runtime.\n\n`rootDirs` can be used to provide a separate \"type layer\" to files that are not TypeScript or JavaScript by providing a home for generated `.d.ts` files in another folder. This technique is useful for bundled applications where you use `import` of files that aren't necessarily code:\n\n```sh\n src\n └── index.ts\n └── css\n     └── main.css\n     └── navigation.css\n\n generated\n └── css\n     └── main.css.d.ts\n     └── navigation.css.d.ts\n```\n\n```json tsconfig\n{\n  \"compilerOptions\": {\n    \"rootDirs\": [\"src\", \"generated\"]\n  }\n}\n```\n\nThis technique lets you generate types ahead of time for the non-code source files. Imports then work naturally based off the source file's location.\nFor example `./src/index.ts` can import the file `./src/css/main.css` and TypeScript will be aware of the bundler's behavior for that filetype via the corresponding generated declaration file.\n\n```ts twoslash\n// @filename: main.css.d.ts\nexport const appClass = \"mainClassF3EC2\";\n// ---cut---\n// @filename: index.ts\nimport { appClass } from \"./main.css\";\n```"
             },
             "typeRoots": {
               "type": ["array", "null"],
-              "description": "By default all _visible_ \"`@types`\" packages are included in your compilation.\nPackages in `node_modules/@types` of any enclosing folder are considered _visible_.\nFor example, that means packages within `./node_modules/@types/`, `../node_modules/@types/`, `../../node_modules/@types/`, and so on.\n\nIf `typeRoots` is specified, _only_ packages under `typeRoots` will be included. For example:\n\n```json tsconfig\n{\n  \"compilerOptions\": {\n    \"typeRoots\": [\"./typings\", \"./vendor/types\"]\n  }\n}\n```\n\nThis config file will include _all_ packages under `./typings` and `./vendor/types`, and no packages from `./node_modules/@types`.\nAll paths are relative to the `tsconfig.json`.",
+              "items": { "type": "string" },
               "uniqueItems": true,
-              "items": { "type": "string" }
+              "description": "By default all _visible_ \"`@types`\" packages are included in your compilation.\nPackages in `node_modules/@types` of any enclosing folder are considered _visible_.\nFor example, that means packages within `./node_modules/@types/`, `../node_modules/@types/`, `../../node_modules/@types/`, and so on.\n\nIf `typeRoots` is specified, _only_ packages under `typeRoots` will be included. For example:\n\n```json tsconfig\n{\n  \"compilerOptions\": {\n    \"typeRoots\": [\"./typings\", \"./vendor/types\"]\n  }\n}\n```\n\nThis config file will include _all_ packages under `./typings` and `./vendor/types`, and no packages from `./node_modules/@types`.\nAll paths are relative to the `tsconfig.json`."
             },
             "types": {
               "type": ["array", "null"],
-              "default": [],
-              "description": "By default all _visible_ \"`@types`\" packages are included in your compilation.\nPackages in `node_modules/@types` of any enclosing folder are considered _visible_.\nFor example, that means packages within `./node_modules/@types/`, `../node_modules/@types/`, `../../node_modules/@types/`, and so on.\n\nIf `types` is specified, only packages listed will be included in the global scope. For instance:\n\n```json tsconfig\n{\n  \"compilerOptions\": {\n    \"types\": [\"node\", \"jest\", \"express\"]\n  }\n}\n```\n\nThis `tsconfig.json` file will _only_ include `./node_modules/@types/node`, `./node_modules/@types/jest` and `./node_modules/@types/express`.\nOther packages under `node_modules/@types/*` will not be included.\n\n### What does this affect?\n\nThis option does not affect how `@types/*` are included in your application code, for example if you had the above `compilerOptions` example with code like:\n\n```ts\nimport * as moment from \"moment\";\n\nmoment().format(\"MMMM Do YYYY, h:mm:ss a\");\n```\n\nThe `moment` import would be fully typed.\n\nWhen you have this option set, by not including a module in the `types` array it:\n\n- Will not add globals to your project (e.g `process` in node, or `expect` in Jest)\n- Will not have exports appear as auto-import recommendations\n\nThis feature differs from [`typeRoots`](https://typescriptlang.org/tsconfig/#typeRoots) in that it is about specifying only the exact types you want included, whereas [`typeRoots`](https://typescriptlang.org/tsconfig/#typeRoots) supports saying you want particular folders.\n\nAs of TypeScript 6.0, the default is `[]` (empty array), meaning no `@types` packages are included in the global scope automatically.",
+              "items": { "type": "string" },
               "uniqueItems": true,
-              "items": { "type": "string" }
+              "default": [],
+              "description": "By default all _visible_ \"`@types`\" packages are included in your compilation.\nPackages in `node_modules/@types` of any enclosing folder are considered _visible_.\nFor example, that means packages within `./node_modules/@types/`, `../node_modules/@types/`, `../../node_modules/@types/`, and so on.\n\nIf `types` is specified, only packages listed will be included in the global scope. For instance:\n\n```json tsconfig\n{\n  \"compilerOptions\": {\n    \"types\": [\"node\", \"jest\", \"express\"]\n  }\n}\n```\n\nThis `tsconfig.json` file will _only_ include `./node_modules/@types/node`, `./node_modules/@types/jest` and `./node_modules/@types/express`.\nOther packages under `node_modules/@types/*` will not be included.\n\n### What does this affect?\n\nThis option does not affect how `@types/*` are included in your application code, for example if you had the above `compilerOptions` example with code like:\n\n```ts\nimport * as moment from \"moment\";\n\nmoment().format(\"MMMM Do YYYY, h:mm:ss a\");\n```\n\nThe `moment` import would be fully typed.\n\nWhen you have this option set, by not including a module in the `types` array it:\n\n- Will not add globals to your project (e.g `process` in node, or `expect` in Jest)\n- Will not have exports appear as auto-import recommendations\n\nThis feature differs from [`typeRoots`](https://typescriptlang.org/tsconfig/#typeRoots) in that it is about specifying only the exact types you want included, whereas [`typeRoots`](https://typescriptlang.org/tsconfig/#typeRoots) supports saying you want particular folders.\n\nAs of TypeScript 6.0, the default is `[]` (empty array), meaning no `@types` packages are included in the global scope automatically."
             },
             "traceResolution": {
               "type": ["boolean", "null"],
@@ -695,172 +670,229 @@
             },
             "lib": {
               "type": ["array", "null"],
-              "description": "TypeScript includes a default set of type definitions for built-in JS APIs (like `Math`), as well as type definitions for things found in browser environments (like `document`).\nTypeScript also includes APIs for newer JS features matching the [`target`](https://typescriptlang.org/tsconfig/#target) you specify; for example the definition for `Map` is available if [`target`](https://typescriptlang.org/tsconfig/#target) is `ES6` or newer.\n\nYou may want to change these for a few reasons:\n\n- Your program doesn't run in a browser, so you don't want the `\"dom\"` type definitions\n- Your runtime platform provides certain JavaScript API objects (maybe through polyfills), but doesn't yet support the full syntax of a given ECMAScript version\n- You have polyfills or native implementations for some, but not all, of a higher level ECMAScript version\n\nIn TypeScript 4.5, lib files can be overridden by npm modules, find out more [in the blog](https://devblogs.microsoft.com/typescript/announcing-typescript-4-5-beta/#supporting-lib-from-node_modules).\n\n### High Level libraries\n\n| Name         | Contents                                                                                                                                          |\n| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |\n| `ES5`        | Core definitions for all ES5 functionality                                                                                                        |\n| `ES2015`     | Additional APIs available in ES2015 (also known as ES6) - `array.find`, `Promise`, `Proxy`, `Symbol`, `Map`, `Set`, `Reflect`, etc.               |\n| `ES6`        | Alias for \"ES2015\"                                                                                                                                |\n| `ES2016`     | Additional APIs available in ES2016 - `array.include`, etc.                                                                                       |\n| `ES7`        | Alias for \"ES2016\"                                                                                                                                |\n| `ES2017`     | Additional APIs available in ES2017 - `Object.entries`, `Object.values`, `Atomics`, `SharedArrayBuffer`, `date.formatToParts`, typed arrays, etc. |\n| `ES2018`     | Additional APIs available in ES2018 - `async` iterables, `promise.finally`, `Intl.PluralRules`, `regexp.groups`, etc.                             |\n| `ES2019`     | Additional APIs available in ES2019 - `array.flat`, `array.flatMap`, `Object.fromEntries`, `string.trimStart`, `string.trimEnd`, etc.             |\n| `ES2020`     | Additional APIs available in ES2020 - `string.matchAll`, etc.                                                                                     |\n| `ES2021`     | Additional APIs available in ES2021 - `promise.any`, `string.replaceAll` etc.                                                                     |\n| `ES2022`     | Additional APIs available in ES2022 - `array.at`, `RegExp.hasIndices`, etc.                                                                       |\n| `ES2023`     | Additional APIs available in ES2023 - `array.with`, `array.findLast`, `array.findLastIndex`, `array.toSorted`, `array.toReversed`, etc.           |\n| `ESNext`     | Additional APIs available in ESNext - This changes as the JavaScript specification evolves                                                        |\n| `DOM`        | [DOM](https://developer.mozilla.org/docs/Glossary/DOM) definitions - `window`, `document`, etc.                                                   |\n| `WebWorker`  | APIs available in [WebWorker](https://developer.mozilla.org/docs/Web/API/Web_Workers_API/Using_web_workers) contexts                              |\n| `ScriptHost` | APIs for the [Windows Script Hosting System](https://wikipedia.org/wiki/Windows_Script_Host)                                                      |\n\n### Individual library components\n\n| Name                      |\n| ------------------------- |\n| `DOM.Iterable`            |\n| `ES2015.Core`             |\n| `ES2015.Collection`       |\n| `ES2015.Generator`        |\n| `ES2015.Iterable`         |\n| `ES2015.Promise`          |\n| `ES2015.Proxy`            |\n| `ES2015.Reflect`          |\n| `ES2015.Symbol`           |\n| `ES2015.Symbol.WellKnown` |\n| `ES2016.Array.Include`    |\n| `ES2017.object`           |\n| `ES2017.Intl`             |\n| `ES2017.SharedMemory`     |\n| `ES2017.String`           |\n| `ES2017.TypedArrays`      |\n| `ES2018.Intl`             |\n| `ES2018.Promise`          |\n| `ES2018.RegExp`           |\n| `ES2019.Array`            |\n| `ES2019.Object`           |\n| `ES2019.String`           |\n| `ES2019.Symbol`           |\n| `ES2020.String`           |\n| `ES2020.Symbol.wellknown` |\n| `ES2021.Promise`          |\n| `ES2021.String`           |\n| `ES2021.WeakRef`          |\n| `ESNext.AsyncIterable`    |\n| `ESNext.Array`            |\n| `ESNext.Intl`             |\n| `ESNext.Symbol`           |\n\nThis list may be out of date, you can see the full list in the [TypeScript source code](https://github.com/microsoft/TypeScript/tree/main/src/lib).",
-              "uniqueItems": true,
               "items": {
                 "type": "string",
-                "anyOf": [
-                  {
-                    "enum": [
-                      "ES5",
-                      "ES6",
-                      "ES2015",
-                      "ES2015.Collection",
-                      "ES2015.Core",
-                      "ES2015.Generator",
-                      "ES2015.Iterable",
-                      "ES2015.Promise",
-                      "ES2015.Proxy",
-                      "ES2015.Reflect",
-                      "ES2015.Symbol.WellKnown",
-                      "ES2015.Symbol",
-                      "ES2016",
-                      "ES2016.Array.Include",
-                      "ES2016.Intl",
-                      "ES2017",
-                      "ES2017.Intl",
-                      "ES2017.Object",
-                      "ES2017.SharedMemory",
-                      "ES2017.String",
-                      "ES2017.TypedArrays",
-                      "ES2017.ArrayBuffer",
-                      "ES2018",
-                      "ES2018.AsyncGenerator",
-                      "ES2018.AsyncIterable",
-                      "ES2018.Intl",
-                      "ES2018.Promise",
-                      "ES2018.Regexp",
-                      "ES2019",
-                      "ES2019.Array",
-                      "ES2019.Intl",
-                      "ES2019.Object",
-                      "ES2019.String",
-                      "ES2019.Symbol",
-                      "ES2020",
-                      "ES2020.BigInt",
-                      "ES2020.Promise",
-                      "ES2020.String",
-                      "ES2020.Symbol.WellKnown",
-                      "ESNext",
-                      "ESNext.Array",
-                      "ESNext.AsyncIterable",
-                      "ESNext.BigInt",
-                      "ESNext.Collection",
-                      "ESNext.Intl",
-                      "ESNext.Iterator",
-                      "ESNext.Object",
-                      "ESNext.Promise",
-                      "ESNext.Regexp",
-                      "ESNext.String",
-                      "ESNext.Symbol",
-                      "DOM",
-                      "DOM.AsyncIterable",
-                      "DOM.Iterable",
-                      "ScriptHost",
-                      "WebWorker",
-                      "WebWorker.AsyncIterable",
-                      "WebWorker.ImportScripts",
-                      "Webworker.Iterable",
-                      "ES7",
-                      "ES2021",
-                      "ES2020.SharedMemory",
-                      "ES2020.Intl",
-                      "ES2020.Date",
-                      "ES2020.Number",
-                      "ES2021.Promise",
-                      "ES2021.String",
-                      "ES2021.WeakRef",
-                      "ESNext.WeakRef",
-                      "ES2021.Intl",
-                      "ES2022",
-                      "ES2022.Array",
-                      "ES2022.Error",
-                      "ES2022.Intl",
-                      "ES2022.Object",
-                      "ES2022.Regexp",
-                      "ES2022.String",
-                      "ES2022.SharedMemory",
-                      "ES2023",
-                      "ES2023.Array",
-                      "ES2024",
-                      "ES2024.ArrayBuffer",
-                      "ES2024.Collection",
-                      "ES2024.Object",
-                      "ES2024.Promise",
-                      "ES2024.Regexp",
-                      "ES2024.SharedMemory",
-                      "ES2024.String",
-                      "ES2025",
-                      "ES2025.Collection",
-                      "ES2025.Float16",
-                      "ES2025.Intl",
-                      "ES2025.Iterator",
-                      "ES2025.Promise",
-                      "ES2025.Regexp",
-                      "Decorators",
-                      "Decorators.Legacy",
-                      "ES2017.Date",
-                      "ES2023.Collection",
-                      "ES2023.Intl",
-                      "ESNext.Decorators",
-                      "ESNext.Disposable",
-                      "ESNext.Error",
-                      "ESNext.Float16",
-                      "ESNext.SharedMemory",
-                      "ESNext.Date",
-                      "ESNext.Temporal",
-                      "ESNext.TypedArrays"
-                    ]
-                  },
-                  { "pattern": "^[Ee][Ss][567]$" },
-                  {
-                    "pattern": "^[Ee][Ss]2015(\\.([Cc][Oo][Ll][Ll][Ee][Cc][Tt][Ii][Oo][Nn]|[Cc][Oo][Rr][Ee]|[Gg][Ee][Nn][Ee][Rr][Aa][Tt][Oo][Rr]|[Ii][Tt][Ee][Rr][Aa][Bb][Ll][Ee]|[Pp][Rr][Oo][Mm][Ii][Ss][Ee]|[Pp][Rr][Oo][Xx][Yy]|[Rr][Ee][Ff][Ll][Ee][Cc][Tt]|[Ss][Yy][Mm][Bb][Oo][Ll]\\.[Ww][Ee][Ll][Ll][Kk][Nn][Oo][Ww][Nn]|[Ss][Yy][Mm][Bb][Oo][Ll]))?$"
-                  },
-                  {
-                    "pattern": "^[Ee][Ss]2016(\\.([Ii][Nn][Tt][Ll]|[Aa][Rr][Rr][Aa][Yy]\\.[Ii][Nn][Cc][Ll][Uu][Dd][Ee]))?$"
-                  },
-                  {
-                    "pattern": "^[Ee][Ss]2017(\\.([Ii][Nn][Tt][Ll]|[Oo][Bb][Jj][Ee][Cc][Tt]|[Ss][Hh][Aa][Rr][Ee][Dd][Mm][Ee][Mm][Oo][Rr][Yy]|[Ss][Tt][Rr][Ii][Nn][Gg]|[Tt][Yy][Pp][Ee][Dd][Aa][Rr][Rr][Aa][Yy][Ss]|[Dd][Aa][Tt][Ee]|[Aa][Rr][Rr][Aa][Yy][Bb][Uu][Ff][Ff][Ee][Rr]))?$"
-                  },
-                  {
-                    "pattern": "^[Ee][Ss]2018(\\.([Aa][Ss][Yy][Nn][Cc][Gg][Ee][Nn][Ee][Rr][Aa][Tt][Oo][Rr]|[Aa][Ss][Yy][Nn][Cc][Ii][Tt][Ee][Rr][Aa][Bb][Ll][Ee]|[Ii][Nn][Tt][Ll]|[Pp][Rr][Oo][Mm][Ii][Ss][Ee]|[Rr][Ee][Gg][Ee][Xx][Pp]))?$"
-                  },
-                  {
-                    "pattern": "^[Ee][Ss]2019(\\.([Aa][Rr][Rr][Aa][Yy]|[Ii][Nn][Tt][Ll]|[Oo][Bb][Jj][Ee][Cc][Tt]|[Ss][Tt][Rr][Ii][Nn][Gg]|[Ss][Yy][Mm][Bb][Oo][Ll]))?$"
-                  },
-                  {
-                    "pattern": "^[Ee][Ss]2020(\\.([Bb][Ii][Gg][Ii][Nn][Tt]|[Pp][Rr][Oo][Mm][Ii][Ss][Ee]|[Ss][Tt][Rr][Ii][Nn][Gg]|[Ss][Yy][Mm][Bb][Oo][Ll]\\.[Ww][Ee][Ll][Ll][Kk][Nn][Oo][Ww][Nn]|[Ss][Hh][Aa][Rr][Ee][Dd][Mm][Ee][Mm][Oo][Rr][Yy]|[Ii][Nn][Tt][Ll]|[Dd][Aa][Tt][Ee]|[Nn][Uu][Mm][Bb][Ee][Rr]))?$"
-                  },
-                  {
-                    "pattern": "^[Ee][Ss]2021(\\.([Ii][Nn][Tt][Ll]|[Pp][Rr][Oo][Mm][Ii][Ss][Ee]|[Ss][Tt][Rr][Ii][Nn][Gg]|[Ww][Ee][Aa][Kk][Rr][Ee][Ff]))?$"
-                  },
-                  {
-                    "pattern": "^[Ee][Ss]2022(\\.([Aa][Rr][Rr][Aa][Yy]|[Ee][Rr][Rr][Oo][Rr]|[Ii][Nn][Tt][Ll]|[Oo][Bb][Jj][Ee][Cc][Tt]|[Ss][Tt][Rr][Ii][Nn][Gg]|[Ss][Hh][Aa][Rr][Ee][Dd][Mm][Ee][Mm][Oo][Rr][Yy]|[Rr][Ee][Gg][Ee][Xx][Pp]))?$"
-                  },
-                  {
-                    "pattern": "^[Ee][Ss]2023(\\.([Ii][Nn][Tt][Ll]|[Aa][Rr][Rr][Aa][Yy]|[Cc][Oo][Ll][Ll][Ee][Cc][Tt][Ii][Oo][Nn]))?$"
-                  },
-                  {
-                    "pattern": "^[Ee][Ss]2024(\\.([Aa][Rr][Rr][Aa][Yy][Bb][Uu][Ff][Ff][Ee][Rr]|[Cc][Oo][Ll][Ll][Ee][Cc][Tt][Ii][Oo][Nn]|[Oo][Bb][Jj][Ee][Cc][Tt]|[Pp][Rr][Oo][Mm][Ii][Ss][Ee]|[Rr][Ee][Gg][Ee][Xx][Pp]|[Ss][Hh][Aa][Rr][Ee][Dd][Mm][Ee][Mm][Oo][Rr][Yy]|[Ss][Tt][Rr][Ii][Nn][Gg]))?$"
-                  },
-                  {
-                    "pattern": "^[Ee][Ss]2025(\\.([Cc][Oo][Ll][Ll][Ee][Cc][Tt][Ii][Oo][Nn]|[Ff][Ll][Oo][Aa][Tt]16|[Ii][Nn][Tt][Ll]|[Ii][Tt][Ee][Rr][Aa][Tt][Oo][Rr]|[Pp][Rr][Oo][Mm][Ii][Ss][Ee]|[Rr][Ee][Gg][Ee][Xx][Pp]))?$"
-                  },
-                  {
-                    "pattern": "^[Ee][Ss][Nn][Ee][Xx][Tt](\\.([Aa][Rr][Rr][Aa][Yy]|[Aa][Ss][Yy][Nn][Cc][Ii][Tt][Ee][Rr][Aa][Bb][Ll][Ee]|[Bb][Ii][Gg][Ii][Nn][Tt]|[Cc][Oo][Ll][Ll][Ee][Cc][Tt][Ii][Oo][Nn]|[Dd][Aa][Tt][Ee]|[Dd][Ee][Cc][Oo][Rr][Aa][Tt][Oo][Rr][Ss]|[Dd][Ii][Ss][Pp][Oo][Ss][Aa][Bb][Ll][Ee]|[Ee][Rr][Rr][Oo][Rr]|[Ff][Ll][Oo][Aa][Tt]16|[Ii][Nn][Tt][Ll]|[Ii][Tt][Ee][Rr][Aa][Tt][Oo][Rr]|[Oo][Bb][Jj][Ee][Cc][Tt]|[Pp][Rr][Oo][Mm][Ii][Ss][Ee]|[Rr][Ee][Gg][Ee][Xx][Pp]|[Ss][Hh][Aa][Rr][Ee][Dd][Mm][Ee][Mm][Oo][Rr][Yy]|[Ss][Tt][Rr][Ii][Nn][Gg]|[Ss][Yy][Mm][Bb][Oo][Ll]|[Tt][Ee][Mm][Pp][Oo][Rr][Aa][Ll]|[Tt][Yy][Pp][Ee][Dd][Aa][Rr][Rr][Aa][Yy][Ss]|[Ww][Ee][Aa][Kk][Rr][Ee][Ff]))?$"
-                  },
-                  {
-                    "pattern": "^[Dd][Oo][Mm](\\.([Aa][Ss][Yy][Nn][Cc])?[Ii][Tt][Ee][Rr][Aa][Bb][Ll][Ee])?$"
-                  },
-                  { "pattern": "^[Ss][Cc][Rr][Ii][Pp][Tt][Hh][Oo][Ss][Tt]$" },
-                  {
-                    "pattern": "^[Ww][Ee][Bb][Ww][Oo][Rr][Kk][Ee][Rr](\\.([Ii][Mm][Pp][Oo][Rr][Tt][Ss][Cc][Rr][Ii][Pp][Tt][Ss]|([Aa][Ss][Yy][Nn][Cc])?[Ii][Tt][Ee][Rr][Aa][Bb][Ll][Ee]))?$"
-                  },
-                  {
-                    "pattern": "^[Dd][Ee][Cc][Oo][Rr][Aa][Tt][Oo][Rr][Ss](\\.([Ll][Ee][Gg][Aa][Cc][Yy]))?$"
-                  }
+                "enum": [
+                  "ES5",
+                  "ES6",
+                  "ES2015",
+                  "ES2015.Collection",
+                  "ES2015.Core",
+                  "ES2015.Generator",
+                  "ES2015.Iterable",
+                  "ES2015.Promise",
+                  "ES2015.Proxy",
+                  "ES2015.Reflect",
+                  "ES2015.Symbol.WellKnown",
+                  "ES2015.Symbol",
+                  "ES2016",
+                  "ES2016.Array.Include",
+                  "ES2016.Intl",
+                  "ES2017",
+                  "ES2017.Intl",
+                  "ES2017.Object",
+                  "ES2017.SharedMemory",
+                  "ES2017.String",
+                  "ES2017.TypedArrays",
+                  "ES2017.ArrayBuffer",
+                  "ES2018",
+                  "ES2018.AsyncGenerator",
+                  "ES2018.AsyncIterable",
+                  "ES2018.Intl",
+                  "ES2018.Promise",
+                  "ES2018.Regexp",
+                  "ES2019",
+                  "ES2019.Array",
+                  "ES2019.Intl",
+                  "ES2019.Object",
+                  "ES2019.String",
+                  "ES2019.Symbol",
+                  "ES2020",
+                  "ES2020.BigInt",
+                  "ES2020.Promise",
+                  "ES2020.String",
+                  "ES2020.Symbol.WellKnown",
+                  "ESNext",
+                  "ESNext.Array",
+                  "ESNext.AsyncIterable",
+                  "ESNext.BigInt",
+                  "ESNext.Collection",
+                  "ESNext.Intl",
+                  "ESNext.Iterator",
+                  "ESNext.Object",
+                  "ESNext.Promise",
+                  "ESNext.Regexp",
+                  "ESNext.String",
+                  "ESNext.Symbol",
+                  "DOM",
+                  "DOM.AsyncIterable",
+                  "DOM.Iterable",
+                  "ScriptHost",
+                  "WebWorker",
+                  "WebWorker.AsyncIterable",
+                  "WebWorker.ImportScripts",
+                  "Webworker.Iterable",
+                  "ES7",
+                  "ES2021",
+                  "ES2020.SharedMemory",
+                  "ES2020.Intl",
+                  "ES2020.Date",
+                  "ES2020.Number",
+                  "ES2021.Promise",
+                  "ES2021.String",
+                  "ES2021.WeakRef",
+                  "ESNext.WeakRef",
+                  "ES2021.Intl",
+                  "ES2022",
+                  "ES2022.Array",
+                  "ES2022.Error",
+                  "ES2022.Intl",
+                  "ES2022.Object",
+                  "ES2022.Regexp",
+                  "ES2022.String",
+                  "ES2022.SharedMemory",
+                  "ES2023",
+                  "ES2023.Array",
+                  "ES2024",
+                  "ES2024.ArrayBuffer",
+                  "ES2024.Collection",
+                  "ES2024.Object",
+                  "ES2024.Promise",
+                  "ES2024.Regexp",
+                  "ES2024.SharedMemory",
+                  "ES2024.String",
+                  "ES2025",
+                  "ES2025.Collection",
+                  "ES2025.Float16",
+                  "ES2025.Intl",
+                  "ES2025.Iterator",
+                  "ES2025.Promise",
+                  "ES2025.Regexp",
+                  "Decorators",
+                  "Decorators.Legacy",
+                  "ES2017.Date",
+                  "ES2023.Collection",
+                  "ES2023.Intl",
+                  "ESNext.Decorators",
+                  "ESNext.Disposable",
+                  "ESNext.Error",
+                  "ESNext.Float16",
+                  "ESNext.SharedMemory",
+                  "ESNext.Date",
+                  "ESNext.Temporal",
+                  "ESNext.TypedArrays",
+                  "es5",
+                  "es6",
+                  "es2015",
+                  "es2015.collection",
+                  "es2015.core",
+                  "es2015.generator",
+                  "es2015.iterable",
+                  "es2015.promise",
+                  "es2015.proxy",
+                  "es2015.reflect",
+                  "es2015.symbol.wellknown",
+                  "es2015.symbol",
+                  "es2016",
+                  "es2016.array.include",
+                  "es2016.intl",
+                  "es2017",
+                  "es2017.intl",
+                  "es2017.object",
+                  "es2017.sharedmemory",
+                  "es2017.string",
+                  "es2017.typedarrays",
+                  "es2017.arraybuffer",
+                  "es2018",
+                  "es2018.asyncgenerator",
+                  "es2018.asynciterable",
+                  "es2018.intl",
+                  "es2018.promise",
+                  "es2018.regexp",
+                  "es2019",
+                  "es2019.array",
+                  "es2019.intl",
+                  "es2019.object",
+                  "es2019.string",
+                  "es2019.symbol",
+                  "es2020",
+                  "es2020.bigint",
+                  "es2020.promise",
+                  "es2020.string",
+                  "es2020.symbol.wellknown",
+                  "esnext",
+                  "esnext.array",
+                  "esnext.asynciterable",
+                  "esnext.bigint",
+                  "esnext.collection",
+                  "esnext.intl",
+                  "esnext.iterator",
+                  "esnext.object",
+                  "esnext.promise",
+                  "esnext.regexp",
+                  "esnext.string",
+                  "esnext.symbol",
+                  "dom",
+                  "dom.asynciterable",
+                  "dom.iterable",
+                  "scripthost",
+                  "webworker",
+                  "webworker.asynciterable",
+                  "webworker.importscripts",
+                  "webworker.iterable",
+                  "es7",
+                  "es2021",
+                  "es2020.sharedmemory",
+                  "es2020.intl",
+                  "es2020.date",
+                  "es2020.number",
+                  "es2021.promise",
+                  "es2021.string",
+                  "es2021.weakref",
+                  "esnext.weakref",
+                  "es2021.intl",
+                  "es2022",
+                  "es2022.array",
+                  "es2022.error",
+                  "es2022.intl",
+                  "es2022.object",
+                  "es2022.regexp",
+                  "es2022.string",
+                  "es2022.sharedmemory",
+                  "es2023",
+                  "es2023.array",
+                  "es2024",
+                  "es2024.arraybuffer",
+                  "es2024.collection",
+                  "es2024.object",
+                  "es2024.promise",
+                  "es2024.regexp",
+                  "es2024.sharedmemory",
+                  "es2024.string",
+                  "es2025",
+                  "es2025.collection",
+                  "es2025.float16",
+                  "es2025.intl",
+                  "es2025.iterator",
+                  "es2025.promise",
+                  "es2025.regexp",
+                  "decorators",
+                  "decorators.legacy",
+                  "es2017.date",
+                  "es2023.collection",
+                  "es2023.intl",
+                  "esnext.decorators",
+                  "esnext.disposable",
+                  "esnext.error",
+                  "esnext.float16",
+                  "esnext.sharedmemory",
+                  "esnext.date",
+                  "esnext.temporal",
+                  "esnext.typedarrays"
                 ]
-              }
+              },
+              "uniqueItems": true,
+              "description": "TypeScript includes a default set of type definitions for built-in JS APIs (like `Math`), as well as type definitions for things found in browser environments (like `document`).\nTypeScript also includes APIs for newer JS features matching the [`target`](https://typescriptlang.org/tsconfig/#target) you specify; for example the definition for `Map` is available if [`target`](https://typescriptlang.org/tsconfig/#target) is `ES6` or newer.\n\nYou may want to change these for a few reasons:\n\n- Your program doesn't run in a browser, so you don't want the `\"dom\"` type definitions\n- Your runtime platform provides certain JavaScript API objects (maybe through polyfills), but doesn't yet support the full syntax of a given ECMAScript version\n- You have polyfills or native implementations for some, but not all, of a higher level ECMAScript version\n\nIn TypeScript 4.5, lib files can be overridden by npm modules, find out more [in the blog](https://devblogs.microsoft.com/typescript/announcing-typescript-4-5-beta/#supporting-lib-from-node_modules).\n\n### High Level libraries\n\n| Name         | Contents                                                                                                                                          |\n| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |\n| `ES5`        | Core definitions for all ES5 functionality                                                                                                        |\n| `ES2015`     | Additional APIs available in ES2015 (also known as ES6) - `array.find`, `Promise`, `Proxy`, `Symbol`, `Map`, `Set`, `Reflect`, etc.               |\n| `ES6`        | Alias for \"ES2015\"                                                                                                                                |\n| `ES2016`     | Additional APIs available in ES2016 - `array.include`, etc.                                                                                       |\n| `ES7`        | Alias for \"ES2016\"                                                                                                                                |\n| `ES2017`     | Additional APIs available in ES2017 - `Object.entries`, `Object.values`, `Atomics`, `SharedArrayBuffer`, `date.formatToParts`, typed arrays, etc. |\n| `ES2018`     | Additional APIs available in ES2018 - `async` iterables, `promise.finally`, `Intl.PluralRules`, `regexp.groups`, etc.                             |\n| `ES2019`     | Additional APIs available in ES2019 - `array.flat`, `array.flatMap`, `Object.fromEntries`, `string.trimStart`, `string.trimEnd`, etc.             |\n| `ES2020`     | Additional APIs available in ES2020 - `string.matchAll`, etc.                                                                                     |\n| `ES2021`     | Additional APIs available in ES2021 - `promise.any`, `string.replaceAll` etc.                                                                     |\n| `ES2022`     | Additional APIs available in ES2022 - `array.at`, `RegExp.hasIndices`, etc.                                                                       |\n| `ES2023`     | Additional APIs available in ES2023 - `array.with`, `array.findLast`, `array.findLastIndex`, `array.toSorted`, `array.toReversed`, etc.           |\n| `ESNext`     | Additional APIs available in ESNext - This changes as the JavaScript specification evolves                                                        |\n| `DOM`        | [DOM](https://developer.mozilla.org/docs/Glossary/DOM) definitions - `window`, `document`, etc.                                                   |\n| `WebWorker`  | APIs available in [WebWorker](https://developer.mozilla.org/docs/Web/API/Web_Workers_API/Using_web_workers) contexts                              |\n| `ScriptHost` | APIs for the [Windows Script Hosting System](https://wikipedia.org/wiki/Windows_Script_Host)                                                      |\n\n### Individual library components\n\n| Name                      |\n| ------------------------- |\n| `DOM.Iterable`            |\n| `ES2015.Core`             |\n| `ES2015.Collection`       |\n| `ES2015.Generator`        |\n| `ES2015.Iterable`         |\n| `ES2015.Promise`          |\n| `ES2015.Proxy`            |\n| `ES2015.Reflect`          |\n| `ES2015.Symbol`           |\n| `ES2015.Symbol.WellKnown` |\n| `ES2016.Array.Include`    |\n| `ES2017.object`           |\n| `ES2017.Intl`             |\n| `ES2017.SharedMemory`     |\n| `ES2017.String`           |\n| `ES2017.TypedArrays`      |\n| `ES2018.Intl`             |\n| `ES2018.Promise`          |\n| `ES2018.RegExp`           |\n| `ES2019.Array`            |\n| `ES2019.Object`           |\n| `ES2019.String`           |\n| `ES2019.Symbol`           |\n| `ES2020.String`           |\n| `ES2020.Symbol.wellknown` |\n| `ES2021.Promise`          |\n| `ES2021.String`           |\n| `ES2021.WeakRef`          |\n| `ESNext.AsyncIterable`    |\n| `ESNext.Array`            |\n| `ESNext.Intl`             |\n| `ESNext.Symbol`           |\n\nThis list may be out of date, you can see the full list in the [TypeScript source code](https://github.com/microsoft/TypeScript/tree/main/src/lib)."
             },
             "libReplacement": {
               "type": ["boolean", "null"],
@@ -1010,7 +1042,8 @@
               "default": false,
               "description": "Built-in iterators are instantiated with a `TReturn` type of undefined instead of `any`."
             }
-          }
+          },
+          "description": "Instructs the TypeScript compiler how to compile .ts files."
         }
       }
     },
@@ -1018,7 +1051,6 @@
       "properties": {
         "typeAcquisition": {
           "type": ["object", "null"],
-          "description": "Auto type (.d.ts) acquisition options for this project. Requires TypeScript version 2.1 or later.",
           "properties": {
             "enable": {
               "type": ["boolean", "null"],
@@ -1027,17 +1059,18 @@
             },
             "include": {
               "type": ["array", "null"],
-              "description": "Specifies a list of type declarations to be included in auto type acquisition. Ex. [\"jquery\", \"lodash\"]",
+              "items": { "type": "string" },
               "uniqueItems": true,
-              "items": { "type": "string" }
+              "description": "Specifies a list of type declarations to be included in auto type acquisition. Ex. [\"jquery\", \"lodash\"]"
             },
             "exclude": {
               "type": ["array", "null"],
-              "description": "Specifies a list of type declarations to be excluded from auto type acquisition. Ex. [\"jquery\", \"lodash\"]",
+              "items": { "type": "string" },
               "uniqueItems": true,
-              "items": { "type": "string" }
+              "description": "Specifies a list of type declarations to be excluded from auto type acquisition. Ex. [\"jquery\", \"lodash\"]"
             }
-          }
+          },
+          "description": "Auto type (.d.ts) acquisition options for this project. Requires TypeScript version 2.1 or later."
         }
       }
     },
@@ -1045,19 +1078,19 @@
       "properties": {
         "references": {
           "type": "array",
-          "uniqueItems": true,
-          "description": "Referenced projects. Requires TypeScript version 3.0 or later.\n\n---\n\nProject references are a way to structure your TypeScript programs into smaller pieces.\nUsing Project References can greatly improve build and editor interaction times, enforce logical separation between components, and organize your code in new and improved ways.\n\nYou can read more about how references works in the [Project References](https://typescriptlang.org/docs/handbook/project-references.html) section of the handbook",
           "items": {
             "type": "object",
-            "description": "Project reference.",
             "properties": {
               "path": {
                 "type": "string",
-                "minLength": 1,
-                "description": "Path to referenced tsconfig or to folder containing tsconfig."
+                "description": "Path to referenced tsconfig or to folder containing tsconfig.",
+                "minLength": 1
               }
-            }
-          }
+            },
+            "description": "Project reference."
+          },
+          "uniqueItems": true,
+          "description": "Referenced projects. Requires TypeScript version 3.0 or later.\n\n---\n\nProject references are a way to structure your TypeScript programs into smaller pieces.\nUsing Project References can greatly improve build and editor interaction times, enforce logical separation between components, and organize your code in new and improved ways.\n\nYou can read more about how references works in the [Project References](https://typescriptlang.org/docs/handbook/project-references.html) section of the handbook"
         }
       }
     },
@@ -1066,7 +1099,6 @@
       "properties": {
         "ts-node": {
           "type": ["object", "null"],
-          "description": "ts-node options.  See also: https://typestrong.org/ts-node/docs/configuration\n\nts-node offers TypeScript execution and REPL for node.js, with source map support.",
           "properties": {
             "compiler": {
               "type": ["string", "null"],
@@ -1080,14 +1112,14 @@
             },
             "compilerOptions": {
               "type": ["object", "null"],
+              "properties": {},
               "additionalProperties": true,
               "allOf": [
                 {
                   "$ref": "#/definitions/compilerOptionsDefinition/properties/compilerOptions"
                 }
               ],
-              "description": "JSON object to merge with TypeScript `compilerOptions`.",
-              "properties": {}
+              "description": "JSON object to merge with TypeScript `compilerOptions`."
             },
             "emit": {
               "type": ["boolean", "null"],
@@ -1118,14 +1150,14 @@
             },
             "ignore": {
               "type": ["array", "null"],
+              "items": { "type": "string" },
               "default": ["(?:^|/)node_modules/"],
-              "description": "Paths which should not be compiled.\n\nEach string in the array is converted to a regular expression via `new RegExp()` and tested against source paths prior to compilation.\n\nSource paths are normalized to posix-style separators, relative to the directory containing `tsconfig.json` or to cwd if no `tsconfig.json` is loaded.\n\nDefault is to ignore all node_modules subdirectories.",
-              "items": { "type": "string" }
+              "description": "Paths which should not be compiled.\n\nEach string in the array is converted to a regular expression via `new RegExp()` and tested against source paths prior to compilation.\n\nSource paths are normalized to posix-style separators, relative to the directory containing `tsconfig.json` or to cwd if no `tsconfig.json` is loaded.\n\nDefault is to ignore all node_modules subdirectories."
             },
             "ignoreDiagnostics": {
               "type": ["array", "null"],
-              "description": "Ignore TypeScript warnings by diagnostic code.",
-              "items": { "type": ["string", "number"] }
+              "items": { "type": ["string", "number"] },
+              "description": "Ignore TypeScript warnings by diagnostic code."
             },
             "logError": {
               "type": ["boolean", "null"],
@@ -1148,8 +1180,8 @@
             },
             "require": {
               "type": ["array", "null"],
-              "description": "Modules to require, like node's `--require` flag.\n\nIf specified in `tsconfig.json`, the modules will be resolved relative to the `tsconfig.json` file.\n\nIf specified programmatically, each input string should be pre-resolved to an absolute path for\nbest results.",
-              "items": { "type": "string" }
+              "items": { "type": "string" },
+              "description": "Modules to require, like node's `--require` flag.\n\nIf specified in `tsconfig.json`, the modules will be resolved relative to the `tsconfig.json` file.\n\nIf specified programmatically, each input string should be pre-resolved to an absolute path for\nbest results."
             },
             "scope": {
               "type": ["boolean", "null"],
@@ -1182,8 +1214,8 @@
                     { "type": ["string", "null"] },
                     {
                       "type": ["object", "null"],
-                      "additionalProperties": true,
-                      "properties": {}
+                      "properties": {},
+                      "additionalProperties": true
                     }
                   ],
                   "maxItems": 2,
@@ -1198,11 +1230,12 @@
               "default": true,
               "description": "**DEPRECATED** Specify type-check is enabled (e.g. `transpileOnly == false`)."
             }
-          }
+          },
+          "description": "ts-node options.  See also: https://typestrong.org/ts-node/docs/configuration\n\nts-node offers TypeScript execution and REPL for node.js, with source map support."
         }
       }
     }
   },
-  "id": "https://json.schemastore.org/tsconfig",
-  "title": "JSON schema for the TypeScript compiler's configuration file"
+  "title": "JSON schema for the TypeScript compiler's configuration file",
+  "allowTrailingCommas": true
 }

@@ -1,6 +1,6 @@
 {
   "$schema": "https://www.schemastore.org/tsconfig.json",
-  "$id": "@jsse/tsconfig/strict-cjs",
+  "$id": "@jsse/tsconfig/strict",
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "checkJs": true,

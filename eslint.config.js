@@ -5,6 +5,7 @@ export default jsse(
     ignores: ["**/dev"],
     debug: false,
     typescript: { strict: true, tsconfig: "tsconfig._eslint.json" },
+    sortImports: true,
     reportUnusedDisableDirectives: true,
     off: [],
     sortPackageJson: true,
@@ -14,6 +15,7 @@ export default jsse(
    * overrides
    */
   { files: ["scripts/**", "dev/**"], rules: { "no-console": "off" } },
+  { files: ["src/json-schema.ts"], rules: { "unicorn/prefer-https": "off" } },
   {
     files: ["tests/**/*.ts"],
     rules: {
