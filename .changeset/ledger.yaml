@@ -2,3 +2,7 @@
   dir: ""
   intents:
     - clean-words-own
+"@jsse/tsconfig@0.6.1":
+  dir: ""
+  intents:
+    - quiet-facts-hang
