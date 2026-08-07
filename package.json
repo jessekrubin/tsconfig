@@ -40,7 +40,8 @@
     "./tsconfig.schema.json": "./tsconfig.schema.json"
   },
   "scripts": {
-    "build": "pnpm run gen && pnpm run test && publint",
+    "build": "pnpm run build:lib && pnpm run gen && pnpm run test && publint",
+    "build:lib": "tsdown",
     "gen": "tsx scripts/update-pkg-json-exports.ts",
     "check": "eslint . && prettier --check --object-wrap=collapse .",
     "fmt": "prettier --write --object-wrap=collapse .",
@@ -48,7 +49,7 @@
     "lint": "eslint .",
     "test": "node --test ./tests/jsse-tsconfig.test.ts && pnpm run typecheck",
     "tsc": "tsc -p tsconfig.json",
-    "prepack": "npm run build",
+    "prepack": "pnpm run build",
     "typecheck": "tsc --noEmit -p tsconfig._build.json"
   },
   "devDependencies": {
