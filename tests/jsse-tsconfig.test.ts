@@ -2,9 +2,11 @@ import assert from "node:assert/strict";
 import { globSync, readFileSync } from "node:fs";
 import { suite, test } from "node:test";
 
+/// keep-sorted
 const TSCONFIG_FILES = [
   "tsconfig.bundler.json",
   "tsconfig.json",
+  "tsconfig.node.json",
   "tsconfig.strict.json",
 ];
 const TSCONFIG_SCHEMA_URL = "https://www.schemastore.org/tsconfig.json";

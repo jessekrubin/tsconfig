@@ -21,6 +21,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "declaration": true,
+    "declarationMap": true,
     "newLine": "lf",
     "noEmitOnError": true,
     "outDir": "${configDir}/dist/esm",
