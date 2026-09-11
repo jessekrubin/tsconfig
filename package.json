@@ -57,15 +57,15 @@
     "typecheck": "tsc --noEmit -p tsconfig._build.json"
   },
   "devDependencies": {
-    "@jsse/eslint-config": "^0.9.16",
+    "@jsse/eslint-config": "^0.9.22",
     "@jsse/prettier-config": "^1.1.0",
-    "@types/node": "^24.13.3",
-    "eslint": "^10.8.0",
-    "oxfmt": "^0.62.0",
+    "@types/node": "^24.13.4",
+    "eslint": "^10.10.0",
+    "oxfmt": "^0.67.0",
     "prettier": "^3.9.6",
-    "publint": "^0.3.23",
+    "publint": "^0.3.24",
     "tsdown": "^0.22.14",
-    "tsx": "^4.23.8",
+    "tsx": "^4.23.13",
     "typescript": "^6.0.3"
   },
   "prettier": "@jsse/prettier-config",
