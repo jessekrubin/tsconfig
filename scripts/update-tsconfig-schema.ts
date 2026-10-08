@@ -3,6 +3,7 @@ import process from "node:process";
 
 import * as prettier from "prettier";
 
+// eslint-disable-next-line unicorn/no-declarations-before-early-exit
 const TSCONFIG_SCHEMA_URL = "https://www.schemastore.org/tsconfig#";
 
 type JsonPrimitive = string | number | boolean | null;
@@ -124,19 +125,20 @@ async function fetchSchema(url: string): Promise<JsonValue> {
 
 /**
  * The upstream tsconfig schema pairs a bunch of enums with a redundant,
- * case-insensitive `pattern` regex sibling inside an `anyOf` - the pattern
- * says nothing the enum doesn't already say, and it turns into unreadable
- * regex noise once this schema gets baked into TypeScript source.
+ * case-insensitive `pattern` regex sibling inside an `anyOf` - the pattern says
+ * nothing the enum doesn't already say, and it turns into unreadable regex
+ * noise once this schema gets baked into TypeScript source.
  *
  * this shows up in (at least):
+ *
  * - `compilerOptions.module`
  * - `compilerOptions.moduleResolution`
  * - `compilerOptions.target`
  * - `compilerOptions.lib`
  * - `compilerOptions.newLine`
  *
- * This drops any `anyOf` branch that's just `{ pattern: "..." }`, and
- * collapses `anyOf` entirely when only one branch survives.
+ * This drops any `anyOf` branch that's just `{ pattern: "..." }`, and collapses
+ * `anyOf` entirely when only one branch survives.
  */
 function stripRedundantAnyOfPatterns(schema: JsonValue): JsonValue {
   visitObjects(schema, (obj) => {

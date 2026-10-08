@@ -82,11 +82,9 @@ async function main() {
   const pkg = JSON.parse(pkgJsonStr) as PackageJson;
   const pkgOg = JSON.parse(pkgJsonStr) as PackageJson;
 
-  /**
-   * ====================
-   * PACKAGE.JSON.EXPORTS
-   * ====================
-   */
+  // ====================
+  // PACKAGE.JSON.EXPORTS
+  // ====================
   for (const tsconfigFile of tsconfigFiles) {
     console.log(tsconfigFile);
     pkg.exports[`./${tsconfigFile}`] = `./${tsconfigFile}`;
@@ -131,12 +129,10 @@ async function main() {
     // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
     delete pkg.exports[key];
   }
-  /**
-   * ==================
-   * PACKAGE.JSON.FILES
-   * ==================
-   */
 
+  // ==================
+  // PACKAGE.JSON.FILES
+  // ==================
   // if not already in files, add it...
   for (const tsconfigFile of tsconfigFiles) {
     if (!pkg.files.includes(tsconfigFile)) {
