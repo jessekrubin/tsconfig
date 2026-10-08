@@ -64,6 +64,32 @@ function reorderKeysInplace(obj: JsonObject, keysOrdering: string[]): void {
     obj[key] = value;
   }
 }
+const SCHEMA_KEYS_ORDERING = [
+  "$schema",
+  "$comment",
+  "id",
+  "$id",
+  "$ref",
+  "title",
+  "type",
+  "const",
+  "enum",
+  "anyOf",
+  "oneOf",
+  "items",
+  "properties",
+  "additionalProperties",
+  "required",
+  "uniqueItems",
+  "allOf",
+  "default",
+  "definitions",
+  "description",
+];
+
+if (SCHEMA_KEYS_ORDERING.length !== new Set(SCHEMA_KEYS_ORDERING).size) {
+  throw new Error("SCHEMA_KEYS_ORDERING contains duplicate keys");
+}
 
 function cleanSchema(schema: JsonValue): JsonValue {
   const keysToRemove = ["x-intellij-html-description", "markdownDescription"];
@@ -72,29 +98,11 @@ function cleanSchema(schema: JsonValue): JsonValue {
     removeKeys(obj, keysToRemove);
 
     // cheapest signal first, prose last - so a property is scannable at a glance
-    const keysOrdering = [
-      "$schema",
-      "$comment",
-      "id",
-      "$ref",
-      "type",
-      "const",
-      "enum",
-      "anyOf",
-      "oneOf",
-      "items",
-      "properties",
-      "additionalProperties",
-      "required",
-      "uniqueItems",
-      "allOf",
-      "default",
-      "definitions",
-      "title",
-      "description",
-    ];
-    reorderKeysInplace(obj, keysOrdering);
+    reorderKeysInplace(obj, SCHEMA_KEYS_ORDERING);
   });
+  if (typeof schema === "object" && schema !== null && !Array.isArray(schema)) {
+    reorderKeysInplace(schema, SCHEMA_KEYS_ORDERING);
+  }
   return schema;
 }
 
@@ -208,10 +216,12 @@ function addLowercaseLibVariants(schema: JsonValue): JsonValue {
   const extraValues: string[] = [];
   for (const value of enumValues) {
     const lower = value.toLowerCase();
-    if (!seen.has(lower)) {
-      seen.add(lower);
-      extraValues.push(lower);
+    if (seen.has(lower)) {
+      continue;
     }
+
+    seen.add(lower);
+    extraValues.push(lower);
   }
 
   if (extraValues.length > 0) {

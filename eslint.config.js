@@ -11,9 +11,7 @@ export default jsse(
     sortPackageJson: true,
     nodeTest: true,
   },
-  /**
-   * overrides
-   */
+  /** overrides */
   { files: ["scripts/**", "dev/**"], rules: { "no-console": "off" } },
   { files: ["src/json-schema.ts"], rules: { "unicorn/prefer-https": "off" } },
   {

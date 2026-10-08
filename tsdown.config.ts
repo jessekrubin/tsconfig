@@ -12,9 +12,7 @@ export default defineConfig({
   entry: ["src/mod.ts"],
   minify: "dce-only",
   deps: {},
-  dts: {
-    sourcemap: false,
-  },
+  dts: { sourcemap: false },
   hash: false,
   clean: true,
 });
