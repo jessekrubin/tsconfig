@@ -26,7 +26,7 @@ type MissingKeys<
 
 // `compilerOptions` - the big one, ~140 keys and the whole point of this package.
 type CompilerOptionsSchemaKeys =
-  keyof Definitions["compilerOptionsDefinition"]["properties"]["compilerOptions"]["properties"];
+  keyof Definitions["compilerOptionsDefinition"]["properties"]["compilerOptions"]["anyOf"][0]["properties"];
 true satisfies MissingKeys<
   CompilerOptionsSchemaKeys,
   keyof TsconfigCompilerOptions
@@ -34,12 +34,12 @@ true satisfies MissingKeys<
 
 // `watchOptions`
 type WatchOptionsSchemaKeys =
-  keyof Definitions["watchOptionsDefinition"]["properties"]["watchOptions"]["properties"];
+  keyof Definitions["watchOptionsDefinition"]["properties"]["watchOptions"]["anyOf"][0]["properties"];
 true satisfies MissingKeys<WatchOptionsSchemaKeys, keyof TsconfigWatchOptions>;
 
 // `typeAcquisition`
 type TypeAcquisitionSchemaKeys =
-  keyof Definitions["typeAcquisitionDefinition"]["properties"]["typeAcquisition"]["properties"];
+  keyof Definitions["typeAcquisitionDefinition"]["properties"]["typeAcquisition"]["anyOf"][0]["properties"];
 true satisfies MissingKeys<
   TypeAcquisitionSchemaKeys,
   keyof TsconfigTypeAcquisition

@@ -1,7 +1,5 @@
 {
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
-  "jsdoc": {
-    "capitalizeDescriptions": false
-  },
+  "jsdoc": { "capitalizeDescriptions": false },
   "ignorePatterns": []
 }
