@@ -55,6 +55,7 @@ function reorderKeys(
   );
 }
 
+// eslint-disable-next-line unicorn/no-unnecessary-parameters
 function reorderKeysInplace(obj: JsonObject, keysOrdering: string[]): void {
   const ordered = reorderKeys(obj, keysOrdering);
   for (const key of Object.keys(obj)) {
@@ -65,6 +66,7 @@ function reorderKeysInplace(obj: JsonObject, keysOrdering: string[]): void {
     obj[key] = value;
   }
 }
+
 const SCHEMA_KEYS_ORDERING = [
   "$schema",
   "$comment",
