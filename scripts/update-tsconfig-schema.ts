@@ -3,6 +3,7 @@ import process from "node:process";
 
 import * as prettier from "prettier";
 
+// eslint-disable-next-line unicorn/no-declarations-before-early-exit
 const TSCONFIG_SCHEMA_URL = "https://www.schemastore.org/tsconfig#";
 
 type JsonPrimitive = string | number | boolean | null;
@@ -54,6 +55,7 @@ function reorderKeys(
   );
 }
 
+// eslint-disable-next-line unicorn/no-unnecessary-parameters
 function reorderKeysInplace(obj: JsonObject, keysOrdering: string[]): void {
   const ordered = reorderKeys(obj, keysOrdering);
   for (const key of Object.keys(obj)) {
@@ -65,6 +67,33 @@ function reorderKeysInplace(obj: JsonObject, keysOrdering: string[]): void {
   }
 }
 
+const SCHEMA_KEYS_ORDERING = [
+  "$schema",
+  "$comment",
+  "id",
+  "$id",
+  "$ref",
+  "title",
+  "type",
+  "const",
+  "enum",
+  "anyOf",
+  "oneOf",
+  "items",
+  "properties",
+  "additionalProperties",
+  "required",
+  "uniqueItems",
+  "allOf",
+  "default",
+  "definitions",
+  "description",
+];
+
+if (SCHEMA_KEYS_ORDERING.length !== new Set(SCHEMA_KEYS_ORDERING).size) {
+  throw new Error("SCHEMA_KEYS_ORDERING contains duplicate keys");
+}
+
 function cleanSchema(schema: JsonValue): JsonValue {
   const keysToRemove = ["x-intellij-html-description", "markdownDescription"];
   visitObjects(schema, (obj) => {
@@ -72,29 +101,11 @@ function cleanSchema(schema: JsonValue): JsonValue {
     removeKeys(obj, keysToRemove);
 
     // cheapest signal first, prose last - so a property is scannable at a glance
-    const keysOrdering = [
-      "$schema",
-      "$comment",
-      "id",
-      "$ref",
-      "type",
-      "const",
-      "enum",
-      "anyOf",
-      "oneOf",
-      "items",
-      "properties",
-      "additionalProperties",
-      "required",
-      "uniqueItems",
-      "allOf",
-      "default",
-      "definitions",
-      "title",
-      "description",
-    ];
-    reorderKeysInplace(obj, keysOrdering);
+    reorderKeysInplace(obj, SCHEMA_KEYS_ORDERING);
   });
+  if (typeof schema === "object" && schema !== null && !Array.isArray(schema)) {
+    reorderKeysInplace(schema, SCHEMA_KEYS_ORDERING);
+  }
   return schema;
 }
 
@@ -116,19 +127,20 @@ async function fetchSchema(url: string): Promise<JsonValue> {
 
 /**
  * The upstream tsconfig schema pairs a bunch of enums with a redundant,
- * case-insensitive `pattern` regex sibling inside an `anyOf` - the pattern
- * says nothing the enum doesn't already say, and it turns into unreadable
- * regex noise once this schema gets baked into TypeScript source.
+ * case-insensitive `pattern` regex sibling inside an `anyOf` - the pattern says
+ * nothing the enum doesn't already say, and it turns into unreadable regex
+ * noise once this schema gets baked into TypeScript source.
  *
  * this shows up in (at least):
+ *
  * - `compilerOptions.module`
  * - `compilerOptions.moduleResolution`
  * - `compilerOptions.target`
  * - `compilerOptions.lib`
  * - `compilerOptions.newLine`
  *
- * This drops any `anyOf` branch that's just `{ pattern: "..." }`, and
- * collapses `anyOf` entirely when only one branch survives.
+ * This drops any `anyOf` branch that's just `{ pattern: "..." }`, and collapses
+ * `anyOf` entirely when only one branch survives.
  */
 function stripRedundantAnyOfPatterns(schema: JsonValue): JsonValue {
   visitObjects(schema, (obj) => {
@@ -208,10 +220,12 @@ function addLowercaseLibVariants(schema: JsonValue): JsonValue {
   const extraValues: string[] = [];
   for (const value of enumValues) {
     const lower = value.toLowerCase();
-    if (!seen.has(lower)) {
-      seen.add(lower);
-      extraValues.push(lower);
+    if (seen.has(lower)) {
+      continue;
     }
+
+    seen.add(lower);
+    extraValues.push(lower);
   }
 
   if (extraValues.length > 0) {

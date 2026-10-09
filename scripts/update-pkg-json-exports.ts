@@ -82,22 +82,22 @@ async function main() {
   const pkg = JSON.parse(pkgJsonStr) as PackageJson;
   const pkgOg = JSON.parse(pkgJsonStr) as PackageJson;
 
-  /**
-   * ====================
-   * PACKAGE.JSON.EXPORTS
-   * ====================
-   */
+  // ====================
+  // PACKAGE.JSON.EXPORTS
+  // ====================
   for (const tsconfigFile of tsconfigFiles) {
-    // const tsconfig = JSON.parse(await fs.readFile(tsconfigFile, 'utf-8'));
     console.log(tsconfigFile);
     pkg.exports[`./${tsconfigFile}`] = `./${tsconfigFile}`;
-    if (tsconfigFile !== "tsconfig.json") {
-      const tsconfigName = tsconfigFile
-        .replace(".json", "")
-        .replace("tsconfig.", "");
-      pkg.exports[`./${tsconfigName}`] = `./${tsconfigFile}`;
-      pkg.exports[`./${tsconfigName}.json`] = `./${tsconfigFile}`;
+
+    if (tsconfigFile === "tsconfig.json") {
+      continue;
     }
+
+    const tsconfigName = tsconfigFile
+      .replace(".json", "")
+      .replace("tsconfig.", "");
+    pkg.exports[`./${tsconfigName}`] = `./${tsconfigFile}`;
+    pkg.exports[`./${tsconfigName}.json`] = `./${tsconfigFile}`;
   }
 
   for (const [key, value] of Object.entries(pkg.exports)) {
@@ -118,21 +118,21 @@ async function main() {
     );
 
     // if not in the tsconfigFiles, remove it from the exports
-    if (!tsconfigFiles.includes(tsconfigFilename)) {
-      echo(
-        `EXPORT NOT FOUND ${tsconfigFile}: Removing ${tsconfigFile} from package.json exports.`,
-      );
-
-      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
-      delete pkg.exports[key];
+    if (tsconfigFiles.includes(tsconfigFilename)) {
+      continue;
     }
-  }
-  /**
-   * ==================
-   * PACKAGE.JSON.FILES
-   * ==================
-   */
 
+    echo(
+      `EXPORT NOT FOUND ${tsconfigFile}: Removing ${tsconfigFile} from package.json exports.`,
+    );
+
+    // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+    delete pkg.exports[key];
+  }
+
+  // ==================
+  // PACKAGE.JSON.FILES
+  // ==================
   // if not already in files, add it...
   for (const tsconfigFile of tsconfigFiles) {
     if (!pkg.files.includes(tsconfigFile)) {
@@ -146,12 +146,14 @@ async function main() {
     // check that the tsconfig file is in tsconfigFiles
     const tsconfigFile = file;
     const tsconfigFilename = path.basename(tsconfigFile);
-    if (!tsconfigFiles.includes(tsconfigFilename)) {
-      echo(
-        `FILE NOT FOUND ${tsconfigFile}: Removing ${tsconfigFile} from package.json files.`,
-      );
-      pkg.files = pkg.files.filter((f) => f !== tsconfigFile);
+    if (tsconfigFiles.includes(tsconfigFilename)) {
+      continue;
     }
+
+    echo(
+      `FILE NOT FOUND ${tsconfigFile}: Removing ${tsconfigFile} from package.json files.`,
+    );
+    pkg.files = pkg.files.filter((f) => f !== tsconfigFile);
   }
 
   // make sure that files is unique and sorted
