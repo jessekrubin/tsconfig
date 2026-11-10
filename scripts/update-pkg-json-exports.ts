@@ -15,6 +15,7 @@ const __DIRNAME = path.dirname(__FILENAME);
 const REPO_ROOT = path.dirname(__DIRNAME);
 const PKG_JSON_FILEPATH = path.resolve(__DIRNAME, "../package.json");
 
+// eslint-disable-next-line unicorn/prefer-smaller-scope
 type PackageJson = {
   name: string;
   version: string;
