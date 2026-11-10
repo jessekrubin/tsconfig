@@ -57,22 +57,22 @@
     "typecheck": "tsc --noEmit -p tsconfig._build.json"
   },
   "devDependencies": {
-    "@jsse/eslint-config": "^0.9.28",
+    "@jsse/eslint-config": "^0.9.31",
     "@jsse/prettier-config": "^1.1.0",
-    "@types/node": "^24.13.4",
-    "eslint": "^10.10.0",
+    "@types/node": "^24.19.2",
+    "eslint": "^10.14.0",
     "oxfmt": "^0.76.0",
-    "prettier": "^3.9.6",
-    "publint": "^0.3.24",
-    "tsdown": "^0.23.0",
-    "tsx": "^4.23.13",
+    "prettier": "^3.9.10",
+    "publint": "^0.3.25",
+    "tsdown": "^0.23.7",
+    "tsx": "^4.23.15",
     "typescript": "^6.0.3"
   },
   "prettier": "@jsse/prettier-config",
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "^11.20.0",
+      "version": "^12.18.0",
       "onFail": "warn"
     }
   },

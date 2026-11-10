@@ -3,7 +3,6 @@ import process from "node:process";
 
 import * as prettier from "prettier";
 
-// eslint-disable-next-line unicorn/no-declarations-before-early-exit
 const TSCONFIG_SCHEMA_URL = "https://www.schemastore.org/tsconfig#";
 
 type JsonPrimitive = string | number | boolean | null;
